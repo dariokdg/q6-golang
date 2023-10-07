@@ -1,9 +1,6 @@
 package core
 
-import (
-	"math/rand"
-	"q6-golang/enumerators"
-)
+import "math/rand"
 
 func GenerateFakePlayers(numberOfPlayersToGenerate int) []Player {
 	var players []Player
@@ -29,13 +26,13 @@ func generateFakeTicket() Ticket {
 	return t
 }
 
-func generateFakeGameParticipation() enumerators.GameParticipation {
+func generateFakeGameParticipation() GameParticipation {
 	n := rand.Intn(3)
 	if n == 0 {
-		return enumerators.GP_TradicionalOnly
+		return GP_TradicionalOnly
 	} else if n == 1 {
-		return enumerators.GP_TradicionalAndRevancha
+		return GP_TradicionalAndRevancha
 	} else {
-		return enumerators.GP_TradicionalAndRevanchaAndSiempreSale
+		return GP_TradicionalAndRevanchaAndSiempreSale
 	}
 }

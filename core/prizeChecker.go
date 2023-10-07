@@ -1,10 +1,6 @@
 package core
 
-import (
-	"q6-golang/enumerators"
-
-	"github.com/shopspring/decimal"
-)
+import "github.com/shopspring/decimal"
 
 func CheckPrizesTradicionalFirstPrize(results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
@@ -13,7 +9,7 @@ func CheckPrizesTradicionalFirstPrize(results GameTypeResult, prize decimal.Deci
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesTradicional(numberOfMatches)
-		if prizeType == enumerators.PTT_FirstPrize {
+		if prizeType == PTT_FirstPrize {
 			winners = append(winners, p)
 		}
 	}
@@ -27,7 +23,7 @@ func CheckPrizesTradicionalSecondPrize(results GameTypeResult, prize decimal.Dec
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesTradicional(numberOfMatches)
-		if prizeType == enumerators.PTT_SecondPrize {
+		if prizeType == PTT_SecondPrize {
 			winners = append(winners, p)
 		}
 	}
@@ -41,7 +37,7 @@ func CheckPrizesTradicionalThirdPrize(results GameTypeResult, prize decimal.Deci
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesTradicional(numberOfMatches)
-		if prizeType == enumerators.PTT_ThirdPrize {
+		if prizeType == PTT_ThirdPrize {
 			winners = append(winners, p)
 		}
 	}
@@ -55,7 +51,7 @@ func CheckPrizesSegundaFirstPrize(results GameTypeResult, prize decimal.Decimal)
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesSegunda(numberOfMatches)
-		if prizeType == enumerators.PTS_FirstPrize {
+		if prizeType == PTS_FirstPrize {
 			winners = append(winners, p)
 		}
 	}
@@ -69,7 +65,7 @@ func CheckPrizesSegundaSecondPrize(results GameTypeResult, prize decimal.Decimal
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesSegunda(numberOfMatches)
-		if prizeType == enumerators.PTS_SecondPrize {
+		if prizeType == PTS_SecondPrize {
 			winners = append(winners, p)
 		}
 	}
@@ -83,7 +79,7 @@ func CheckPrizesSegundaThirdPrize(results GameTypeResult, prize decimal.Decimal)
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesSegunda(numberOfMatches)
-		if prizeType == enumerators.PTS_ThirdPrize {
+		if prizeType == PTS_ThirdPrize {
 			winners = append(winners, p)
 		}
 	}
@@ -97,7 +93,7 @@ func CheckPrizesRevanchaPrize(results GameTypeResult, prize decimal.Decimal) Win
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesRevancha(numberOfMatches)
-		if prizeType == enumerators.PTR_Prize {
+		if prizeType == PTR_Prize {
 			winners = append(winners, p)
 		}
 	}
@@ -117,17 +113,17 @@ func CheckPrizesSiempreSalePrize(results GameTypeResult, prize decimal.Decimal) 
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesSiempreSale(numberOfMatches)
-		if prizeType == enumerators.PTSS_PotentialWinnerSixMatches {
+		if prizeType == PTSS_PotentialWinnerSixMatches {
 			sixMatches = append(winners, p)
-		} else if prizeType == enumerators.PTSS_PotentialWinnerFiveMatches {
+		} else if prizeType == PTSS_PotentialWinnerFiveMatches {
 			fiveMatches = append(winners, p)
-		} else if prizeType == enumerators.PTSS_PotentialWinnerFourMatches {
+		} else if prizeType == PTSS_PotentialWinnerFourMatches {
 			fourMatches = append(winners, p)
-		} else if prizeType == enumerators.PTSS_PotentialWinnerThreeMatches {
+		} else if prizeType == PTSS_PotentialWinnerThreeMatches {
 			threeMatches = append(winners, p)
-		} else if prizeType == enumerators.PTSS_PotentialWinnerTwoMatches {
+		} else if prizeType == PTSS_PotentialWinnerTwoMatches {
 			twoMatches = append(winners, p)
-		} else if prizeType == enumerators.PTSS_PotentialWinnerOneMatch {
+		} else if prizeType == PTSS_PotentialWinnerOneMatch {
 			oneMatch = append(winners, p)
 		}
 	}
@@ -156,14 +152,14 @@ func CheckPrizesPozoExtraPrize(results GameTypeResult, prize decimal.Decimal, dr
 	players := results.Players
 	var winners []Player
 	for _, p := range players {
-		if p.Quini6Ticket.Games == enumerators.GP_TradicionalOnly {
+		if p.Quini6Ticket.Games == GP_TradicionalOnly {
 			//check if users' 6 numbers are identical to tradicional's drawing and segunda's drawing
 			if GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawings.GTRT.DrawingResults) == 6 ||
 				GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawings.GTRS.DrawingResults) == 6 {
 				//this user can't play
 				continue
 			}
-		} else if p.Quini6Ticket.Games == enumerators.GP_TradicionalAndRevancha || p.Quini6Ticket.Games == enumerators.GP_TradicionalAndRevanchaAndSiempreSale {
+		} else if p.Quini6Ticket.Games == GP_TradicionalAndRevancha || p.Quini6Ticket.Games == GP_TradicionalAndRevanchaAndSiempreSale {
 			//check if users' 6 numbers are identical to tradicional's drawing, segunda's drawing and revancha's drawing
 			if GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawings.GTRT.DrawingResults) == 6 ||
 				GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawings.GTRS.DrawingResults) == 6 ||
@@ -174,7 +170,7 @@ func CheckPrizesPozoExtraPrize(results GameTypeResult, prize decimal.Decimal, dr
 		}
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesPozoExtra(numberOfMatches)
-		if prizeType == enumerators.PTPE_Prize {
+		if prizeType == PTPE_Prize {
 			winners = append(winners, p)
 		}
 	}

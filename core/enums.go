@@ -1,4 +1,4 @@
-package enumerators
+package core
 
 type GameType int64
 type Matches int64

@@ -1,18 +1,14 @@
 package core
 
-import (
-	e "q6-golang/enumerators"
-
-	"github.com/shopspring/decimal"
-)
+import "github.com/shopspring/decimal"
 
 type Winner struct {
-	GameType             e.GameType
+	GameType             GameType
 	PrizeWinnerList      []Player
 	PrizeAmountPerWinner decimal.Decimal
 }
 
-func GetWinner(gameType e.GameType, winners []Player, prizeAmountTotal decimal.Decimal) Winner {
+func GetWinner(gameType GameType, winners []Player, prizeAmountTotal decimal.Decimal) Winner {
 	var prizeAmountPerWinner decimal.Decimal
 	numberOfWinners := len(winners)
 	numberOfWinners_d := decimal.NewFromInt(int64(numberOfWinners))

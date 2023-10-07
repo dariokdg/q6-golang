@@ -1,136 +1,132 @@
 package core
 
-import (
-	e "q6-golang/enumerators"
-)
-
-func CheckMatches(numberOfMatches int) e.Matches {
+func CheckMatches(numberOfMatches int) Matches {
 	switch numberOfMatches {
 	case 6:
-		return e.M_SixMatches
+		return M_SixMatches
 	case 5:
-		return e.M_FiveMatches
+		return M_FiveMatches
 	case 4:
-		return e.M_FourMatches
+		return M_FourMatches
 	case 3:
-		return e.M_ThreeMatches
+		return M_ThreeMatches
 	case 2:
-		return e.M_TwoMatches
+		return M_TwoMatches
 	case 1:
-		return e.M_OneMatch
+		return M_OneMatch
 	case 0:
-		return e.M_NoMatches
+		return M_NoMatches
 	default:
-		return e.M_NoMatches
+		return M_NoMatches
 	}
 }
 
-func CheckMatchesTradicional(numberOfMatches int) e.PrizeTypeTradicional {
+func CheckMatchesTradicional(numberOfMatches int) PrizeTypeTradicional {
 	tradicionalMatches := CheckMatches(numberOfMatches)
 	switch tradicionalMatches {
-	case e.M_SixMatches:
-		return e.PTT_FirstPrize
-	case e.M_FiveMatches:
-		return e.PTT_SecondPrize
-	case e.M_FourMatches:
-		return e.PTT_ThirdPrize
-	case e.M_ThreeMatches:
-		return e.PTT_NoPrize
-	case e.M_TwoMatches:
-		return e.PTT_NoPrize
-	case e.M_OneMatch:
-		return e.PTT_NoPrize
-	case e.M_NoMatches:
-		return e.PTT_NoPrize
+	case M_SixMatches:
+		return PTT_FirstPrize
+	case M_FiveMatches:
+		return PTT_SecondPrize
+	case M_FourMatches:
+		return PTT_ThirdPrize
+	case M_ThreeMatches:
+		return PTT_NoPrize
+	case M_TwoMatches:
+		return PTT_NoPrize
+	case M_OneMatch:
+		return PTT_NoPrize
+	case M_NoMatches:
+		return PTT_NoPrize
 	default:
-		return e.PTT_NoPrize
+		return PTT_NoPrize
 	}
 }
 
-func CheckMatchesSegunda(numberOfMatches int) e.PrizeTypeSegunda {
+func CheckMatchesSegunda(numberOfMatches int) PrizeTypeSegunda {
 	segundaMatches := CheckMatches(numberOfMatches)
 	switch segundaMatches {
-	case e.M_SixMatches:
-		return e.PTS_FirstPrize
-	case e.M_FiveMatches:
-		return e.PTS_SecondPrize
-	case e.M_FourMatches:
-		return e.PTS_ThirdPrize
-	case e.M_ThreeMatches:
-		return e.PTS_NoPrize
-	case e.M_TwoMatches:
-		return e.PTS_NoPrize
-	case e.M_OneMatch:
-		return e.PTS_NoPrize
-	case e.M_NoMatches:
-		return e.PTS_NoPrize
+	case M_SixMatches:
+		return PTS_FirstPrize
+	case M_FiveMatches:
+		return PTS_SecondPrize
+	case M_FourMatches:
+		return PTS_ThirdPrize
+	case M_ThreeMatches:
+		return PTS_NoPrize
+	case M_TwoMatches:
+		return PTS_NoPrize
+	case M_OneMatch:
+		return PTS_NoPrize
+	case M_NoMatches:
+		return PTS_NoPrize
 	default:
-		return e.PTS_NoPrize
+		return PTS_NoPrize
 	}
 }
 
-func CheckMatchesRevancha(numberOfMatches int) e.PrizeTypeRevancha {
+func CheckMatchesRevancha(numberOfMatches int) PrizeTypeRevancha {
 	revanchaMatches := CheckMatches(numberOfMatches)
 	switch revanchaMatches {
-	case e.M_SixMatches:
-		return e.PTR_Prize
-	case e.M_FiveMatches:
-		return e.PTR_NoPrize
-	case e.M_FourMatches:
-		return e.PTR_NoPrize
-	case e.M_ThreeMatches:
-		return e.PTR_NoPrize
-	case e.M_TwoMatches:
-		return e.PTR_NoPrize
-	case e.M_OneMatch:
-		return e.PTR_NoPrize
-	case e.M_NoMatches:
-		return e.PTR_NoPrize
+	case M_SixMatches:
+		return PTR_Prize
+	case M_FiveMatches:
+		return PTR_NoPrize
+	case M_FourMatches:
+		return PTR_NoPrize
+	case M_ThreeMatches:
+		return PTR_NoPrize
+	case M_TwoMatches:
+		return PTR_NoPrize
+	case M_OneMatch:
+		return PTR_NoPrize
+	case M_NoMatches:
+		return PTR_NoPrize
 	default:
-		return e.PTR_NoPrize
+		return PTR_NoPrize
 	}
 }
 
-func CheckMatchesSiempreSale(numberOfMatches int) e.PrizeTypeSiempreSale {
+func CheckMatchesSiempreSale(numberOfMatches int) PrizeTypeSiempreSale {
 	siempreSaleMatches := CheckMatches(numberOfMatches)
 	switch siempreSaleMatches {
-	case e.M_SixMatches:
-		return e.PTSS_PotentialWinnerSixMatches
-	case e.M_FiveMatches:
-		return e.PTSS_PotentialWinnerFiveMatches
-	case e.M_FourMatches:
-		return e.PTSS_PotentialWinnerFourMatches
-	case e.M_ThreeMatches:
-		return e.PTSS_PotentialWinnerThreeMatches
-	case e.M_TwoMatches:
-		return e.PTSS_PotentialWinnerTwoMatches
-	case e.M_OneMatch:
-		return e.PTSS_PotentialWinnerOneMatch
-	case e.M_NoMatches:
-		return e.PTSS_NoPrize
+	case M_SixMatches:
+		return PTSS_PotentialWinnerSixMatches
+	case M_FiveMatches:
+		return PTSS_PotentialWinnerFiveMatches
+	case M_FourMatches:
+		return PTSS_PotentialWinnerFourMatches
+	case M_ThreeMatches:
+		return PTSS_PotentialWinnerThreeMatches
+	case M_TwoMatches:
+		return PTSS_PotentialWinnerTwoMatches
+	case M_OneMatch:
+		return PTSS_PotentialWinnerOneMatch
+	case M_NoMatches:
+		return PTSS_NoPrize
 	default:
-		return e.PTSS_NoPrize
+		return PTSS_NoPrize
 	}
 }
 
-func CheckMatchesPozoExtra(numberOfMatches int) e.PrizeTypePozoExtra {
+func CheckMatchesPozoExtra(numberOfMatches int) PrizeTypePozoExtra {
 	pozoExtraMatches := CheckMatches(numberOfMatches)
 	switch pozoExtraMatches {
-	case e.M_SixMatches:
-		return e.PTPE_Prize
-	case e.M_FiveMatches:
-		return e.PTPE_NoPrize
-	case e.M_FourMatches:
-		return e.PTPE_NoPrize
-	case e.M_ThreeMatches:
-		return e.PTPE_NoPrize
-	case e.M_TwoMatches:
-		return e.PTPE_NoPrize
-	case e.M_OneMatch:
-		return e.PTPE_NoPrize
-	case e.M_NoMatches:
-		return e.PTPE_NoPrize
+	case M_SixMatches:
+		return PTPE_Prize
+	case M_FiveMatches:
+		return PTPE_NoPrize
+	case M_FourMatches:
+		return PTPE_NoPrize
+	case M_ThreeMatches:
+		return PTPE_NoPrize
+	case M_TwoMatches:
+		return PTPE_NoPrize
+	case M_OneMatch:
+		return PTPE_NoPrize
+	case M_NoMatches:
+		return PTPE_NoPrize
 	default:
-		return e.PTPE_NoPrize
+		return PTPE_NoPrize
 	}
 }

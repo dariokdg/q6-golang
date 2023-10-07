@@ -1,7 +1,6 @@
 package core
 
 import (
-	e "q6-golang/enumerators"
 	"sort"
 )
 
@@ -27,7 +26,7 @@ func executeTradicional(players []Player) GameTypeResult {
 	//drawing := DrawingResult{FirstNumber: 1, SecondNumber: 3, ThirdNumber: 5, FourthNumber: 17, FifthNumber: 21, SixthNumber: 25}
 	tradicionalNumbers := []int{drawing.FirstNumber, drawing.SecondNumber, drawing.ThirdNumber, drawing.FourthNumber, drawing.FifthNumber, drawing.SixthNumber}
 	sort.Ints(tradicionalNumbers)
-	return GameTypeResult{Players: players, GameType: e.GT_Tradicional, DrawingResults: tradicionalNumbers}
+	return GameTypeResult{Players: players, GameType: GT_Tradicional, DrawingResults: tradicionalNumbers}
 }
 
 func executeSegunda(players []Player) GameTypeResult {
@@ -35,7 +34,7 @@ func executeSegunda(players []Player) GameTypeResult {
 	//drawing := DrawingResult{FirstNumber: 2, SecondNumber: 7, ThirdNumber: 11, FourthNumber: 13, FifthNumber: 23, SixthNumber: 32}
 	segundaNumbers := []int{drawing.FirstNumber, drawing.SecondNumber, drawing.ThirdNumber, drawing.FourthNumber, drawing.FifthNumber, drawing.SixthNumber}
 	sort.Ints(segundaNumbers)
-	return GameTypeResult{Players: players, GameType: e.GT_Segunda, DrawingResults: segundaNumbers}
+	return GameTypeResult{Players: players, GameType: GT_Segunda, DrawingResults: segundaNumbers}
 }
 
 func executeRevancha(players []Player) GameTypeResult {
@@ -45,11 +44,11 @@ func executeRevancha(players []Player) GameTypeResult {
 	sort.Ints(revanchaNumbers)
 	var validPlayers []Player
 	for _, p := range players {
-		if p.Quini6Ticket.Games == e.GP_TradicionalAndRevancha || p.Quini6Ticket.Games == e.GP_TradicionalAndRevanchaAndSiempreSale {
+		if p.Quini6Ticket.Games == GP_TradicionalAndRevancha || p.Quini6Ticket.Games == GP_TradicionalAndRevanchaAndSiempreSale {
 			validPlayers = append(validPlayers, p)
 		}
 	}
-	return GameTypeResult{Players: validPlayers, GameType: e.GT_Revancha, DrawingResults: revanchaNumbers}
+	return GameTypeResult{Players: validPlayers, GameType: GT_Revancha, DrawingResults: revanchaNumbers}
 }
 
 func executeSiempreSale(players []Player) GameTypeResult {
@@ -58,11 +57,11 @@ func executeSiempreSale(players []Player) GameTypeResult {
 	sort.Ints(siempreSaleNumbers)
 	var validPlayers []Player
 	for _, p := range players {
-		if p.Quini6Ticket.Games == e.GP_TradicionalAndRevanchaAndSiempreSale {
+		if p.Quini6Ticket.Games == GP_TradicionalAndRevanchaAndSiempreSale {
 			validPlayers = append(validPlayers, p)
 		}
 	}
-	return GameTypeResult{Players: validPlayers, GameType: e.GT_SiempreSale, DrawingResults: siempreSaleNumbers}
+	return GameTypeResult{Players: validPlayers, GameType: GT_SiempreSale, DrawingResults: siempreSaleNumbers}
 }
 
 func executePozoExtra(players []Player, tNumbers []int, sNumbers []int, rNumbers []int) GameTypeResult {
@@ -79,5 +78,5 @@ func executePozoExtra(players []Player, tNumbers []int, sNumbers []int, rNumbers
 		}
 	}
 	sort.Ints(pozoExtraNumbers)
-	return GameTypeResult{Players: players, GameType: e.GT_PozoExtra, DrawingResults: pozoExtraNumbers}
+	return GameTypeResult{Players: players, GameType: GT_PozoExtra, DrawingResults: pozoExtraNumbers}
 }

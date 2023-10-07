@@ -1,10 +1,6 @@
 package core
 
-import (
-	e "q6-golang/enumerators"
-
-	"github.com/shopspring/decimal"
-)
+import "github.com/shopspring/decimal"
 
 type GameSpends struct {
 	TradicionalSpends decimal.Decimal `json:"tradicionalSpends"`
@@ -12,7 +8,7 @@ type GameSpends struct {
 	SiempreSaleSpends decimal.Decimal `json:"siempreSaleSpends"`
 }
 
-func GetTotalSpends(totalSpends decimal.Decimal, games e.GameParticipation) GameSpends {
+func GetTotalSpends(totalSpends decimal.Decimal, games GameParticipation) GameSpends {
 	var TS decimal.Decimal
 	var RS decimal.Decimal
 	var SSS decimal.Decimal
@@ -21,15 +17,15 @@ func GetTotalSpends(totalSpends decimal.Decimal, games e.GameParticipation) Game
 	five := decimal.NewFromInt(5)
 	six := decimal.NewFromInt(6)
 	eight := decimal.NewFromInt(8)
-	if games == e.GP_TradicionalOnly {
+	if games == GP_TradicionalOnly {
 		TS = totalSpends
 		RS = zero
 		SSS = zero
-	} else if games == e.GP_TradicionalAndRevancha {
+	} else if games == GP_TradicionalAndRevancha {
 		TS = totalSpends.Div(six).Mul(five)
 		RS = totalSpends.Div(six)
 		SSS = zero
-	} else if games == e.GP_TradicionalAndRevanchaAndSiempreSale {
+	} else if games == GP_TradicionalAndRevanchaAndSiempreSale {
 		TS = totalSpends.Div(eight).Mul(five)
 		RS = totalSpends.Div(eight)
 		SSS = totalSpends.Div(four)

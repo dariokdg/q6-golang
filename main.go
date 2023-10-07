@@ -3,14 +3,13 @@ package main
 import (
 	"net/http"
 	core "q6-golang/core"
-	"q6-golang/enumerators"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
 func startGame(c *gin.Context) {
-	testPlayer := core.GetPlayer("Juanito Perez", 20, "Rosario", "Calle Falsa 123", "3415559999", core.GetTicket([]int{1, 5, 6, 12, 25, 41}, enumerators.GP_TradicionalAndRevancha))
+	testPlayer := core.GetPlayer("Juanito Perez", 20, "Rosario", "Calle Falsa 123", "3415559999", core.GetTicket([]int{1, 5, 6, 12, 25, 41}, core.GP_TradicionalAndRevancha))
 	players := []core.Player{testPlayer}
 	if _, err := strconv.ParseInt(c.Query("randomPlayers"), 10, 64); err == nil {
 		numOfPlayers, _ := strconv.ParseInt(c.Query("randomPlayers"), 10, 64)
