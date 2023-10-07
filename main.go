@@ -18,6 +18,7 @@ func startGame(c *gin.Context) {
 	} else {
 		players = append(players, core.GenerateFakePlayers(2500)...)
 	}
+	//q6 := core.ExecuteGame(players) --> this already returns a bunch of info we could hand back to FE via API response
 	core.ExecuteGame(players)
 	tradicional := core.GenerateDrawing()
 	segunda := core.GenerateDrawing()
