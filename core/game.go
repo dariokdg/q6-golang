@@ -7,11 +7,10 @@ import (
 )
 
 type Q6Game struct {
-	players    []Player
-	totalSales TotalSales
-	prizes     PrizeGenerator
-	results    GameResults
-	winners    []Winner
+	TotalSales TotalSales     `json:"totalSales"`
+	Prizes     PrizeGenerator `json:"prizeGenerator"`
+	Results    GameResults    `json:"gameResults"`
+	Winners    []Winner       `json:"winners"`
 }
 
 func ExecuteGame(players []Player) Q6Game {
@@ -26,10 +25,10 @@ func ExecuteGame(players []Player) Q6Game {
 	drawings := executeGames(players)
 	printDrawingResults(drawings)
 
-	winners := calculateWinners(drawings, pG)
+	winners := calculateWinners(players, drawings, pG)
 	printWinners(drawings, pG, winners)
 
-	return Q6Game{players, tS, pG, drawings, winners}
+	return Q6Game{tS, pG, drawings, winners}
 }
 
 func printProgramStartup() {
@@ -59,20 +58,32 @@ func calculateTotalSales(players []Player) TotalSales {
 	return TotalSales{totalTradicionalSales, totalTradicionalPlayers, totalRevanchaSales, totalRevanchaPlayers, totalSiempreSaleSales, totalSiempreSalePlayers}
 }
 
-func calculateWinners(drawings GameResults, pG PrizeGenerator) []Winner {
-	tFP_winners := CheckPrizesTradicionalFirstPrize(drawings.GTRT, pG.TradicionalFirstPrize)
-	tSP_winners := CheckPrizesTradicionalSecondPrize(drawings.GTRT, pG.TradicionalSecondPrize)
-	tTP_winners := CheckPrizesTradicionalThirdPrize(drawings.GTRT, pG.TradicionalThirdPrize)
+func calculateWinners(players []Player, drawings GameResults, pG PrizeGenerator) []Winner {
+	tFP_winners := CheckPrizesTradicionalFirstPrize(players, drawings.GTRT, pG.TradicionalFirstPrize)
+	tSP_winners := CheckPrizesTradicionalSecondPrize(players, drawings.GTRT, pG.TradicionalSecondPrize)
+	tTP_winners := CheckPrizesTradicionalThirdPrize(players, drawings.GTRT, pG.TradicionalThirdPrize)
 
-	sFP_winners := CheckPrizesSegundaFirstPrize(drawings.GTRS, pG.SegundaFirstPrize)
-	sSP_winners := CheckPrizesSegundaSecondPrize(drawings.GTRS, pG.SegundaSecondPrize)
-	sTP_winners := CheckPrizesSegundaThirdPrize(drawings.GTRS, pG.SegundaThirdPrize)
+	sFP_winners := CheckPrizesSegundaFirstPrize(players, drawings.GTRS, pG.SegundaFirstPrize)
+	sSP_winners := CheckPrizesSegundaSecondPrize(players, drawings.GTRS, pG.SegundaSecondPrize)
+	sTP_winners := CheckPrizesSegundaThirdPrize(players, drawings.GTRS, pG.SegundaThirdPrize)
 
-	r_winners := CheckPrizesRevanchaPrize(drawings.GTRR, pG.RevanchaPrize)
+	var validRevanchaPlayers []Player
+	for _, p := range players {
+		if p.Quini6Ticket.Games == GP_TradicionalAndRevancha || p.Quini6Ticket.Games == GP_TradicionalAndRevanchaAndSiempreSale {
+			validRevanchaPlayers = append(validRevanchaPlayers, p)
+		}
+	}
+	r_winners := CheckPrizesRevanchaPrize(validRevanchaPlayers, drawings.GTRR, pG.RevanchaPrize)
 
-	sS_winners := CheckPrizesSiempreSalePrize(drawings.GTRSS, pG.SiempreSalePrize)
+	var validSiempreSalePlayers []Player
+	for _, p := range players {
+		if p.Quini6Ticket.Games == GP_TradicionalAndRevancha || p.Quini6Ticket.Games == GP_TradicionalAndRevanchaAndSiempreSale {
+			validSiempreSalePlayers = append(validSiempreSalePlayers, p)
+		}
+	}
+	sS_winners := CheckPrizesSiempreSalePrize(validSiempreSalePlayers, drawings.GTRSS, pG.SiempreSalePrize)
 
-	pE_winners := CheckPrizesPozoExtraPrize(drawings.GTRPE, pG.PozoExtraPrize, drawings)
+	pE_winners := CheckPrizesPozoExtraPrize(players, drawings.GTRPE, pG.PozoExtraPrize, drawings)
 
 	return []Winner{tFP_winners, tSP_winners, tTP_winners, sFP_winners, sSP_winners, sTP_winners, r_winners, sS_winners, pE_winners}
 }

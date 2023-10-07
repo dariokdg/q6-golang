@@ -17,19 +17,8 @@ func startGame(c *gin.Context) {
 	} else {
 		players = append(players, core.GenerateFakePlayers(2500)...)
 	}
-	//q6 := core.ExecuteGame(players) --> this already returns a bunch of info we could hand back to FE via API response
-	core.ExecuteGame(players)
-	tradicional := core.GenerateDrawing()
-	segunda := core.GenerateDrawing()
-	revancha := core.GenerateDrawing()
-	siempreSale := core.GenerateDrawing()
-	var response = map[string]core.DrawingResult{
-		"#1 - Tradicional":  tradicional,
-		"#2 - Segunda":      segunda,
-		"#3 - Revancha":     revancha,
-		"#4 - Siempre Sale": siempreSale,
-	}
-	c.IndentedJSON(http.StatusOK, response)
+	q6 := core.ExecuteGame(players)
+	c.IndentedJSON(http.StatusOK, q6)
 }
 
 func main() {

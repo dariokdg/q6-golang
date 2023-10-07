@@ -2,9 +2,8 @@ package core
 
 import "github.com/shopspring/decimal"
 
-func CheckPrizesTradicionalFirstPrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesTradicionalFirstPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
@@ -16,9 +15,8 @@ func CheckPrizesTradicionalFirstPrize(results GameTypeResult, prize decimal.Deci
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesTradicionalSecondPrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesTradicionalSecondPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
@@ -30,9 +28,8 @@ func CheckPrizesTradicionalSecondPrize(results GameTypeResult, prize decimal.Dec
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesTradicionalThirdPrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesTradicionalThirdPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
@@ -44,9 +41,8 @@ func CheckPrizesTradicionalThirdPrize(results GameTypeResult, prize decimal.Deci
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesSegundaFirstPrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesSegundaFirstPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
@@ -58,9 +54,8 @@ func CheckPrizesSegundaFirstPrize(results GameTypeResult, prize decimal.Decimal)
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesSegundaSecondPrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesSegundaSecondPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
@@ -72,9 +67,8 @@ func CheckPrizesSegundaSecondPrize(results GameTypeResult, prize decimal.Decimal
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesSegundaThirdPrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesSegundaThirdPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
@@ -86,9 +80,8 @@ func CheckPrizesSegundaThirdPrize(results GameTypeResult, prize decimal.Decimal)
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesRevanchaPrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesRevanchaPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
@@ -100,9 +93,8 @@ func CheckPrizesRevanchaPrize(results GameTypeResult, prize decimal.Decimal) Win
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesSiempreSalePrize(results GameTypeResult, prize decimal.Decimal) Winner {
+func CheckPrizesSiempreSalePrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
 	drawing := results.DrawingResults
-	players := results.Players
 	var sixMatches []Player
 	var fiveMatches []Player
 	var fourMatches []Player
@@ -144,12 +136,11 @@ func CheckPrizesSiempreSalePrize(results GameTypeResult, prize decimal.Decimal) 
 	return GetWinner(results.GameType, winners, prize)
 }
 
-func CheckPrizesPozoExtraPrize(results GameTypeResult, prize decimal.Decimal, drawings GameResults) Winner {
+func CheckPrizesPozoExtraPrize(players []Player, results GameTypeResult, prize decimal.Decimal, drawings GameResults) Winner {
 
 	//to participate this player must NOT have 6 matches in any of the three main results
 
 	drawing := results.DrawingResults
-	players := results.Players
 	var winners []Player
 	for _, p := range players {
 		if p.Quini6Ticket.Games == GP_TradicionalOnly {

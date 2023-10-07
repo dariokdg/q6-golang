@@ -3,9 +3,9 @@ package core
 import "github.com/shopspring/decimal"
 
 type Winner struct {
-	GameType             GameType
-	PrizeWinnerList      []Player
-	PrizeAmountPerWinner decimal.Decimal
+	GameType             GameType        `json:"gameType"`
+	PrizeWinnerList      []Player        `json:"prizeWinnerList"`
+	PrizeAmountPerWinner decimal.Decimal `json:"prizeAmountPerWinner"`
 }
 
 func GetWinner(gameType GameType, winners []Player, prizeAmountTotal decimal.Decimal) Winner {
