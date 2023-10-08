@@ -1,8 +1,6 @@
 package core
 
-import (
-	"sort"
-)
+import "sort"
 
 type GameResults struct {
 	GTRT  GameTypeResult `json:"gameTypeResultTradicional"`

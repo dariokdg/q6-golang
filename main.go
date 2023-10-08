@@ -9,10 +9,10 @@ import (
 )
 
 func startGame(c *gin.Context) {
-	testPlayer := core.GetPlayer("Juanito Perez", 20, "Rosario", "Calle Falsa 123", "3415559999", core.GetTicket([]int{1, 5, 6, 12, 25, 41}, core.GP_TradicionalAndRevancha))
+	testPlayer := core.GetPlayer("Juanito Perez", 20, "Rosario", core.GetTicket([]int{1, 5, 6, 12, 25, 41}, core.GP_TradicionalAndRevancha))
 	players := []core.Player{testPlayer}
-	if _, err := strconv.ParseInt(c.Query("randomPlayers"), 10, 64); err == nil {
-		numOfPlayers, _ := strconv.ParseInt(c.Query("randomPlayers"), 10, 64)
+	if _, err := strconv.ParseInt(c.Query("players"), 10, 64); err == nil {
+		numOfPlayers, _ := strconv.ParseInt(c.Query("players"), 10, 64)
 		players = append(players, core.GenerateFakePlayers(int(numOfPlayers))...)
 	} else {
 		players = append(players, core.GenerateFakePlayers(2500)...)

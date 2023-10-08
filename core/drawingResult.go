@@ -1,8 +1,9 @@
 package core
 
 import (
-	"math/rand"
 	"slices"
+
+	"github.com/Pallinder/go-randomdata"
 )
 
 type DrawingResult struct {
@@ -95,5 +96,5 @@ func getSixthNumber(dR DrawingResult) int {
 }
 
 func getQ6Number() int {
-	return rand.Intn(45) + 1
+	return randomdata.Number(45) + 1
 }

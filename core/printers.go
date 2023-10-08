@@ -153,7 +153,7 @@ func printWinners(drawings GameResults, pG PrizeGenerator, winners []Winner) {
 	t.AppendSeparator()
 	t.AppendRow([]interface{}{"REVANCHA", "MAIN PRIZE", "$ " + pG.RevanchaPrize.Round(2).String(), strconv.Itoa(len(r_winners.PrizeWinnerList)), "6", "$ " + r_winners.PrizeAmountPerWinner.Round(2).String()})
 	t.AppendSeparator()
-	t.AppendRow([]interface{}{"SIEMPRE SALE", "MAIN PRIZE", "$ " + pG.SiempreSalePrize.Round(2).String(), strconv.Itoa(len(sS_winners.PrizeWinnerList)), "6/5/4/3/2/1", "$ " + sS_winners.PrizeAmountPerWinner.Round(2).String()})
+	t.AppendRow([]interface{}{"SIEMPRE SALE", "MAIN PRIZE", "$ " + pG.SiempreSalePrize.Round(2).String(), strconv.Itoa(len(sS_winners.PrizeWinnerList)), sS_winners.NumberOfMatches, "$ " + sS_winners.PrizeAmountPerWinner.Round(2).String()})
 	t.AppendSeparator()
 	t.AppendFooter(table.Row{"POZO EXTRA", "MAIN PRIZE", "$ " + pG.PozoExtraPrize.Round(2).String(), strconv.Itoa(len(pE_winners.PrizeWinnerList)), "6", "$ " + pE_winners.PrizeAmountPerWinner.Round(2).String()})
 	t.Render()

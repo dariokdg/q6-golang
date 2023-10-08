@@ -7,9 +7,9 @@ import (
 )
 
 type Q6Game struct {
-	TotalSales TotalSales     `json:"totalSales"`
-	Prizes     PrizeGenerator `json:"prizeGenerator"`
-	Results    GameResults    `json:"gameResults"`
+	TotalSales TotalSales     `json:"sales"`
+	Prizes     PrizeGenerator `json:"prizes"`
+	Results    GameResults    `json:"results"`
 	Winners    []Winner       `json:"winners"`
 }
 

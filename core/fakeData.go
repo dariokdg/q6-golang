@@ -1,6 +1,6 @@
 package core
 
-import "math/rand"
+import "github.com/Pallinder/go-randomdata"
 
 func GenerateFakePlayers(numberOfPlayersToGenerate int) []Player {
 	var players []Player
@@ -11,13 +11,23 @@ func GenerateFakePlayers(numberOfPlayersToGenerate int) []Player {
 }
 
 func generateFakePlayer() Player {
-	n := "Testy name"
-	age := rand.Intn(81) + 18
-	c := "Rosario"
-	ad := "Calle Falsa 123"
-	p := "3410000000"
-	t := generateFakeTicket()
-	return GetPlayer(n, age, c, ad, p, t)
+	name := generateRandomName()
+	age := generateRandomAdultAge()
+	city := generateRandomCity()
+	ticket := generateFakeTicket()
+	return GetPlayer(name, age, city, ticket)
+}
+
+func generateRandomName() string {
+	return randomdata.FullName(randomdata.RandomGender)
+}
+
+func generateRandomAdultAge() int {
+	return randomdata.Number(81) + 18
+}
+
+func generateRandomCity() string {
+	return randomdata.City()
 }
 
 func generateFakeTicket() Ticket {
@@ -27,7 +37,7 @@ func generateFakeTicket() Ticket {
 }
 
 func generateFakeGameParticipation() GameParticipation {
-	n := rand.Intn(3)
+	n := randomdata.Number(3)
 	if n == 0 {
 		return GP_TradicionalOnly
 	} else if n == 1 {

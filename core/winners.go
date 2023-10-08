@@ -5,11 +5,12 @@ import "github.com/shopspring/decimal"
 type Winner struct {
 	GameType             GameType        `json:"gameType"`
 	PrizeType            PrizeType       `json:"prizeType"`
+	NumberOfMatches      int             `json:"numberOfMatches"`
 	PrizeWinnerList      []Player        `json:"prizeWinnerList"`
 	PrizeAmountPerWinner decimal.Decimal `json:"prizeAmountPerWinner"`
 }
 
-func GetWinners(gameType GameType, prizeType PrizeType, winners []Player, prizeAmountTotal decimal.Decimal) Winner {
+func GetWinners(gameType GameType, prizeType PrizeType, numberOfMatches int, winners []Player, prizeAmountTotal decimal.Decimal) Winner {
 	var prizeAmountPerWinner decimal.Decimal
 	numberOfWinners := len(winners)
 	numberOfWinners_d := decimal.NewFromInt(int64(numberOfWinners))
@@ -23,5 +24,5 @@ func GetWinners(gameType GameType, prizeType PrizeType, winners []Player, prizeA
 		updatedPlayer.PrizeMoney = decimal.Sum(updatedPlayer.PrizeMoney, prizeAmountPerWinner)
 		updatedPlayers = append(updatedPlayers, updatedPlayer)
 	}
-	return Winner{gameType, prizeType, updatedPlayers, prizeAmountPerWinner}
+	return Winner{gameType, prizeType, numberOfMatches, updatedPlayers, prizeAmountPerWinner}
 }
