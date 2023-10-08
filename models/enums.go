@@ -1,4 +1,4 @@
-package core
+package models
 
 type Matches int64
 type GameType string

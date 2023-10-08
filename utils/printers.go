@@ -1,29 +1,30 @@
-package core
+package utils
 
 import (
 	"fmt"
 	"os"
+	"q6-golang/models"
 	"strconv"
 
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 
-func printTotalSales(tS TotalSales) {
+func PrintTotalSales(tS models.TotalSales) {
 	fmt.Println("--------------------------------------------")
-	fmt.Printf("TOTAL NUMBER OF PLAYERS: %d\n", GetTotalGamePlayers(tS))
+	fmt.Printf("TOTAL NUMBER OF PLAYERS: %d\n", models.GetTotalGamePlayers(tS))
 	fmt.Printf("    > TRADICIONAL PLAYERS: %d\n", tS.TotalTradicionalPlayers)
 	fmt.Printf("    > REVANCHA PLAYERS: %d\n", tS.TotalRevanchaPlayers)
 	fmt.Printf("    > SIEMPRE SALE PLAYERS: %d\n", tS.TotalSiempreSalePlayers)
 	fmt.Println("--------------------------------------------")
 	fmt.Println("\n--------------------------------------------")
-	fmt.Printf("TOTAL SALES: $ %s\n", GetTotalGameSales(tS))
+	fmt.Printf("TOTAL SALES: $ %s\n", models.GetTotalGameSales(tS))
 	fmt.Printf("    > TRADICIONAL SALES: $ %s\n", tS.TotalTradicionalSales)
 	fmt.Printf("    > REVANCHA SALES: $ %s\n", tS.TotalRevanchaSales)
 	fmt.Printf("    > SIEMPRE SALE SALES: $ %s\n", tS.TotalSiempreSaleSales)
 	fmt.Println("--------------------------------------------")
 }
 
-func printPrizes(pG PrizeGenerator) {
+func PrintPrizes(pG models.PrizeGenerator) {
 	fmt.Println("")
 	t := table.NewWriter()
 	t.SetTitle("QUINI 6 PRIZE LIST")
@@ -51,7 +52,7 @@ func printPrizes(pG PrizeGenerator) {
 
 }
 
-func printDrawingResults(gR GameResults) {
+func PrintDrawingResults(gR models.GameResults) {
 
 	GTRT := gR.GTRT
 	GTRS := gR.GTRS
@@ -111,14 +112,14 @@ func printDrawingResults(gR GameResults) {
 	t2.Render()
 }
 
-func getCorrectValue(g GameTypeResult, index int) string {
+func getCorrectValue(g models.GameTypeResult, index int) string {
 	if len(g.DrawingResults) > index {
 		return strconv.Itoa(g.DrawingResults[index-1])
 	}
 	return " "
 }
 
-func printWinners(drawings GameResults, pG PrizeGenerator, winners []Winner) {
+func PrintWinners(drawings models.GameResults, pG models.PrizeGenerator, winners []models.Winner) {
 	tFP_winners := winners[0]
 	tSP_winners := winners[1]
 	tTP_winners := winners[2]

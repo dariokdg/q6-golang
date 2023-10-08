@@ -1,54 +1,49 @@
-package core
+package utils
 
-import "sort"
+import (
+	"q6-golang/models"
+	"sort"
+)
 
-type GameResults struct {
-	GTRT  GameTypeResult `json:"gameTypeResultTradicional"`
-	GTRS  GameTypeResult `json:"gameTypeResultSegunda"`
-	GTRR  GameTypeResult `json:"gameTypeResultRevancha"`
-	GTRSS GameTypeResult `json:"gameTypeResultSiempreSale"`
-	GTRPE GameTypeResult `json:"gameTypeResultPozoExtra"`
-}
-
-func executeGames(players []Player) GameResults {
+func ExecuteGames(players []models.Player) models.GameResults {
 	t := executeTradicional(players)
 	s := executeSegunda(players)
 	r := executeRevancha(players)
 	ss := executeSiempreSale(players)
 	pe := executePozoExtra(players, t.DrawingResults, s.DrawingResults, r.DrawingResults)
-	return GameResults{t, s, r, ss, pe}
+	return models.GameResults{GTRT: t, GTRS: s, GTRR: r, GTRSS: ss, GTRPE: pe}
 }
 
-func executeTradicional(players []Player) GameTypeResult {
-	drawing := GenerateDrawing()
+func executeTradicional(players []models.Player) models.GameTypeResult {
+	drawing := models.GenerateDrawing()
 	//drawing := DrawingResult{FirstNumber: 1, SecondNumber: 3, ThirdNumber: 5, FourthNumber: 17, FifthNumber: 21, SixthNumber: 25}
 	tradicionalNumbers := []int{drawing.FirstNumber, drawing.SecondNumber, drawing.ThirdNumber, drawing.FourthNumber, drawing.FifthNumber, drawing.SixthNumber}
 	sort.Ints(tradicionalNumbers)
-	return GameTypeResult{GameType: GT_Tradicional, DrawingResults: tradicionalNumbers}
+	return models.GameTypeResult{GameType: models.GT_Tradicional, DrawingResults: tradicionalNumbers}
 }
 
-func executeSegunda(players []Player) GameTypeResult {
-	drawing := GenerateDrawing()
+func executeSegunda(players []models.Player) models.GameTypeResult {
+	drawing := models.GenerateDrawing()
 	segundaNumbers := []int{drawing.FirstNumber, drawing.SecondNumber, drawing.ThirdNumber, drawing.FourthNumber, drawing.FifthNumber, drawing.SixthNumber}
 	sort.Ints(segundaNumbers)
-	return GameTypeResult{GameType: GT_Segunda, DrawingResults: segundaNumbers}
+	return models.GameTypeResult{GameType: models.GT_Segunda, DrawingResults: segundaNumbers}
 }
 
-func executeRevancha(players []Player) GameTypeResult {
-	drawing := GenerateDrawing()
+func executeRevancha(players []models.Player) models.GameTypeResult {
+	drawing := models.GenerateDrawing()
 	revanchaNumbers := []int{drawing.FirstNumber, drawing.SecondNumber, drawing.ThirdNumber, drawing.FourthNumber, drawing.FifthNumber, drawing.SixthNumber}
 	sort.Ints(revanchaNumbers)
-	return GameTypeResult{GameType: GT_Revancha, DrawingResults: revanchaNumbers}
+	return models.GameTypeResult{GameType: models.GT_Revancha, DrawingResults: revanchaNumbers}
 }
 
-func executeSiempreSale(players []Player) GameTypeResult {
-	drawing := GenerateDrawing()
+func executeSiempreSale(players []models.Player) models.GameTypeResult {
+	drawing := models.GenerateDrawing()
 	siempreSaleNumbers := []int{drawing.FirstNumber, drawing.SecondNumber, drawing.ThirdNumber, drawing.FourthNumber, drawing.FifthNumber, drawing.SixthNumber}
 	sort.Ints(siempreSaleNumbers)
-	return GameTypeResult{GameType: GT_SiempreSale, DrawingResults: siempreSaleNumbers}
+	return models.GameTypeResult{GameType: models.GT_SiempreSale, DrawingResults: siempreSaleNumbers}
 }
 
-func executePozoExtra(players []Player, tNumbers []int, sNumbers []int, rNumbers []int) GameTypeResult {
+func executePozoExtra(players []models.Player, tNumbers []int, sNumbers []int, rNumbers []int) models.GameTypeResult {
 	var tempList []int
 	tempList = append(tempList, tNumbers...)
 	tempList = append(tempList, sNumbers...)
@@ -62,5 +57,5 @@ func executePozoExtra(players []Player, tNumbers []int, sNumbers []int, rNumbers
 		}
 	}
 	sort.Ints(pozoExtraNumbers)
-	return GameTypeResult{GameType: GT_PozoExtra, DrawingResults: pozoExtraNumbers}
+	return models.GameTypeResult{GameType: models.GT_PozoExtra, DrawingResults: pozoExtraNumbers}
 }

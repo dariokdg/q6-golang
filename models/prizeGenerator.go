@@ -1,4 +1,4 @@
-package core
+package models
 
 import "github.com/shopspring/decimal"
 
@@ -17,7 +17,7 @@ type PrizeGenerator struct {
 	PozoExtraPrize         decimal.Decimal `json:"pozoExtraPrize"`
 }
 
-func getPrizes(totalTradicionalSales decimal.Decimal, totalRevanchaSales decimal.Decimal, totalSiempreSaleSales decimal.Decimal) PrizeGenerator {
+func GetPrizes(totalTradicionalSales decimal.Decimal, totalRevanchaSales decimal.Decimal, totalSiempreSaleSales decimal.Decimal) PrizeGenerator {
 	pOne := decimal.NewFromFloat(0.1)
 	pFour := decimal.NewFromFloat(0.4)
 	pFive := decimal.NewFromFloat(0.5)

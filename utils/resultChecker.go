@@ -1,4 +1,4 @@
-package core
+package utils
 
 func GetNumberOfMatches(user []int, system []int) int {
 	matches := 0

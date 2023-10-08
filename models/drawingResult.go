@@ -1,4 +1,4 @@
-package core
+package models
 
 import (
 	"slices"
@@ -17,20 +17,20 @@ type DrawingResult struct {
 
 func GenerateDrawing() DrawingResult {
 	var dR DrawingResult
-	dR.FirstNumber = getFirstNumber(dR)
-	dR.SecondNumber = getSecondNumber(dR)
-	dR.ThirdNumber = getThirdNumber(dR)
-	dR.FourthNumber = getFourthNumber(dR)
-	dR.FifthNumber = getFifthNumber(dR)
-	dR.SixthNumber = getSixthNumber(dR)
+	dR.FirstNumber = getFirstNumber(&dR)
+	dR.SecondNumber = getSecondNumber(&dR)
+	dR.ThirdNumber = getThirdNumber(&dR)
+	dR.FourthNumber = getFourthNumber(&dR)
+	dR.FifthNumber = getFifthNumber(&dR)
+	dR.SixthNumber = getSixthNumber(&dR)
 	return dR
 }
 
-func getFirstNumber(dR DrawingResult) int {
+func getFirstNumber(dR *DrawingResult) int {
 	return getQ6Number()
 }
 
-func getSecondNumber(dR DrawingResult) int {
+func getSecondNumber(dR *DrawingResult) int {
 	keepRunning := true
 	var secondNumber int
 	drawingResultNumbers := []int{dR.FirstNumber}
@@ -43,7 +43,7 @@ func getSecondNumber(dR DrawingResult) int {
 	return secondNumber
 }
 
-func getThirdNumber(dR DrawingResult) int {
+func getThirdNumber(dR *DrawingResult) int {
 	keepRunning := true
 	var thirdNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber}
@@ -56,7 +56,7 @@ func getThirdNumber(dR DrawingResult) int {
 	return thirdNumber
 }
 
-func getFourthNumber(dR DrawingResult) int {
+func getFourthNumber(dR *DrawingResult) int {
 	keepRunning := true
 	var fourthNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber, dR.ThirdNumber}
@@ -69,7 +69,7 @@ func getFourthNumber(dR DrawingResult) int {
 	return fourthNumber
 }
 
-func getFifthNumber(dR DrawingResult) int {
+func getFifthNumber(dR *DrawingResult) int {
 	keepRunning := true
 	var fifthNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber, dR.ThirdNumber, dR.FourthNumber}
@@ -82,7 +82,7 @@ func getFifthNumber(dR DrawingResult) int {
 	return fifthNumber
 }
 
-func getSixthNumber(dR DrawingResult) int {
+func getSixthNumber(dR *DrawingResult) int {
 	keepRunning := true
 	var sixthNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber, dR.ThirdNumber, dR.FourthNumber, dR.FifthNumber}
