@@ -21,7 +21,7 @@ func CheckMatches(numberOfMatches int) Matches {
 	}
 }
 
-func CheckMatchesTradicional(numberOfMatches int) PrizeTypeTradicional {
+func CheckMatchesTradicional(numberOfMatches int) PrizeType {
 	tradicionalMatches := CheckMatches(numberOfMatches)
 	switch tradicionalMatches {
 	case M_SixMatches:
@@ -43,7 +43,7 @@ func CheckMatchesTradicional(numberOfMatches int) PrizeTypeTradicional {
 	}
 }
 
-func CheckMatchesSegunda(numberOfMatches int) PrizeTypeSegunda {
+func CheckMatchesSegunda(numberOfMatches int) PrizeType {
 	segundaMatches := CheckMatches(numberOfMatches)
 	switch segundaMatches {
 	case M_SixMatches:
@@ -65,7 +65,7 @@ func CheckMatchesSegunda(numberOfMatches int) PrizeTypeSegunda {
 	}
 }
 
-func CheckMatchesRevancha(numberOfMatches int) PrizeTypeRevancha {
+func CheckMatchesRevancha(numberOfMatches int) PrizeType {
 	revanchaMatches := CheckMatches(numberOfMatches)
 	switch revanchaMatches {
 	case M_SixMatches:
@@ -87,29 +87,29 @@ func CheckMatchesRevancha(numberOfMatches int) PrizeTypeRevancha {
 	}
 }
 
-func CheckMatchesSiempreSale(numberOfMatches int) PrizeTypeSiempreSale {
+func CheckMatchesSiempreSale(numberOfMatches int) int {
 	siempreSaleMatches := CheckMatches(numberOfMatches)
 	switch siempreSaleMatches {
 	case M_SixMatches:
-		return PTSS_PotentialWinnerSixMatches
+		return 6
 	case M_FiveMatches:
-		return PTSS_PotentialWinnerFiveMatches
+		return 5
 	case M_FourMatches:
-		return PTSS_PotentialWinnerFourMatches
+		return 4
 	case M_ThreeMatches:
-		return PTSS_PotentialWinnerThreeMatches
+		return 3
 	case M_TwoMatches:
-		return PTSS_PotentialWinnerTwoMatches
+		return 2
 	case M_OneMatch:
-		return PTSS_PotentialWinnerOneMatch
+		return 1
 	case M_NoMatches:
-		return PTSS_NoPrize
+		return 0
 	default:
-		return PTSS_NoPrize
+		return 0
 	}
 }
 
-func CheckMatchesPozoExtra(numberOfMatches int) PrizeTypePozoExtra {
+func CheckMatchesPozoExtra(numberOfMatches int) PrizeType {
 	pozoExtraMatches := CheckMatches(numberOfMatches)
 	switch pozoExtraMatches {
 	case M_SixMatches:

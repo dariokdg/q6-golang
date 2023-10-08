@@ -5,11 +5,11 @@ import (
 )
 
 type GameResults struct {
-	GTRT  GameTypeResult `json:"GTRT"`
-	GTRS  GameTypeResult `json:"GTRS"`
-	GTRR  GameTypeResult `json:"GTRR"`
-	GTRSS GameTypeResult `json:"GTRSS"`
-	GTRPE GameTypeResult `json:"GTRPE"`
+	GTRT  GameTypeResult `json:"gameTypeResultTradicional"`
+	GTRS  GameTypeResult `json:"gameTypeResultSegunda"`
+	GTRR  GameTypeResult `json:"gameTypeResultRevancha"`
+	GTRSS GameTypeResult `json:"gameTypeResultSiempreSale"`
+	GTRPE GameTypeResult `json:"gameTypeResultPozoExtra"`
 }
 
 func executeGames(players []Player) GameResults {

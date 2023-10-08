@@ -1,21 +1,9 @@
 package core
 
-type GameType int64
 type Matches int64
-type PrizeTypeTradicional int64
-type PrizeTypeSegunda int64
-type PrizeTypeRevancha int64
-type PrizeTypeSiempreSale int64
-type PrizeTypePozoExtra int64
-type GameParticipation int64
-
-const (
-	GT_Tradicional GameType = iota
-	GT_Segunda
-	GT_Revancha
-	GT_SiempreSale
-	GT_PozoExtra
-)
+type GameType string
+type PrizeType string
+type GameParticipation string
 
 const (
 	M_NoMatches Matches = iota
@@ -28,41 +16,32 @@ const (
 )
 
 const (
-	PTT_NoPrize PrizeTypeTradicional = iota
-	PTT_FirstPrize
-	PTT_SecondPrize
-	PTT_ThirdPrize
+	GT_Tradicional GameType = "Tradicional"
+	GT_Segunda     GameType = "Segunda"
+	GT_Revancha    GameType = "Revancha"
+	GT_SiempreSale GameType = "Siempre Sale"
+	GT_PozoExtra   GameType = "Pozo Extra"
 )
 
 const (
-	PTS_NoPrize PrizeTypeSegunda = iota
-	PTS_FirstPrize
-	PTS_SecondPrize
-	PTS_ThirdPrize
+	PTT_NoPrize     PrizeType = "Tradicional: No Prize"
+	PTT_FirstPrize  PrizeType = "Tradicional: First Prize"
+	PTT_SecondPrize PrizeType = "Tradicional: Second Prize"
+	PTT_ThirdPrize  PrizeType = "Tradicional: Third Prize"
+	PTS_NoPrize     PrizeType = "Segunda: No Prize"
+	PTS_FirstPrize  PrizeType = "Segunda: First Prize"
+	PTS_SecondPrize PrizeType = "Segunda: Second Prize"
+	PTS_ThirdPrize  PrizeType = "Segunda: Third Prize"
+	PTR_NoPrize     PrizeType = "Revancha: No Prize"
+	PTR_Prize       PrizeType = "Revancha: Main Prize"
+	PTSS_NoPrize    PrizeType = "Siempre Sale: No Prize"
+	PTSS_Prize      PrizeType = "Siempre Sale: Main Prize"
+	PTPE_NoPrize    PrizeType = "Pozo Extra: No Prize"
+	PTPE_Prize      PrizeType = "Pozo Extra: Main Prize"
 )
 
 const (
-	PTR_NoPrize PrizeTypeRevancha = iota
-	PTR_Prize
-)
-
-const (
-	PTSS_NoPrize PrizeTypeSiempreSale = iota
-	PTSS_PotentialWinnerSixMatches
-	PTSS_PotentialWinnerFiveMatches
-	PTSS_PotentialWinnerFourMatches
-	PTSS_PotentialWinnerThreeMatches
-	PTSS_PotentialWinnerTwoMatches
-	PTSS_PotentialWinnerOneMatch
-)
-
-const (
-	PTPE_NoPrize PrizeTypePozoExtra = iota
-	PTPE_Prize
-)
-
-const (
-	GP_TradicionalOnly GameParticipation = iota
-	GP_TradicionalAndRevancha
-	GP_TradicionalAndRevanchaAndSiempreSale
+	GP_TradicionalOnly                      GameParticipation = "Tradicional"
+	GP_TradicionalAndRevancha               GameParticipation = "Tradicional, Revancha"
+	GP_TradicionalAndRevanchaAndSiempreSale GameParticipation = "Tradicional, Revancha, Siempre Sale"
 )

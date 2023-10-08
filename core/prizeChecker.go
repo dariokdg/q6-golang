@@ -12,7 +12,7 @@ func CheckPrizesTradicionalFirstPrize(players []Player, results GameTypeResult, 
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTT_FirstPrize, winners, prize)
 }
 
 func CheckPrizesTradicionalSecondPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
@@ -25,7 +25,7 @@ func CheckPrizesTradicionalSecondPrize(players []Player, results GameTypeResult,
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTT_SecondPrize, winners, prize)
 }
 
 func CheckPrizesTradicionalThirdPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
@@ -38,7 +38,7 @@ func CheckPrizesTradicionalThirdPrize(players []Player, results GameTypeResult, 
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTT_ThirdPrize, winners, prize)
 }
 
 func CheckPrizesSegundaFirstPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
@@ -51,7 +51,7 @@ func CheckPrizesSegundaFirstPrize(players []Player, results GameTypeResult, priz
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTS_FirstPrize, winners, prize)
 }
 
 func CheckPrizesSegundaSecondPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
@@ -64,7 +64,7 @@ func CheckPrizesSegundaSecondPrize(players []Player, results GameTypeResult, pri
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTS_SecondPrize, winners, prize)
 }
 
 func CheckPrizesSegundaThirdPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
@@ -77,7 +77,7 @@ func CheckPrizesSegundaThirdPrize(players []Player, results GameTypeResult, priz
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTS_ThirdPrize, winners, prize)
 }
 
 func CheckPrizesRevanchaPrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
@@ -90,7 +90,7 @@ func CheckPrizesRevanchaPrize(players []Player, results GameTypeResult, prize de
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTR_Prize, winners, prize)
 }
 
 func CheckPrizesSiempreSalePrize(players []Player, results GameTypeResult, prize decimal.Decimal) Winner {
@@ -105,17 +105,17 @@ func CheckPrizesSiempreSalePrize(players []Player, results GameTypeResult, prize
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.SelectedNumbers, drawing)
 		prizeType := CheckMatchesSiempreSale(numberOfMatches)
-		if prizeType == PTSS_PotentialWinnerSixMatches {
+		if prizeType == 6 {
 			sixMatches = append(winners, p)
-		} else if prizeType == PTSS_PotentialWinnerFiveMatches {
+		} else if prizeType == 5 {
 			fiveMatches = append(winners, p)
-		} else if prizeType == PTSS_PotentialWinnerFourMatches {
+		} else if prizeType == 4 {
 			fourMatches = append(winners, p)
-		} else if prizeType == PTSS_PotentialWinnerThreeMatches {
+		} else if prizeType == 3 {
 			threeMatches = append(winners, p)
-		} else if prizeType == PTSS_PotentialWinnerTwoMatches {
+		} else if prizeType == 2 {
 			twoMatches = append(winners, p)
-		} else if prizeType == PTSS_PotentialWinnerOneMatch {
+		} else if prizeType == 1 {
 			oneMatch = append(winners, p)
 		}
 	}
@@ -133,7 +133,7 @@ func CheckPrizesSiempreSalePrize(players []Player, results GameTypeResult, prize
 		winners = append(winners, oneMatch...)
 	}
 
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTSS_Prize, winners, prize)
 }
 
 func CheckPrizesPozoExtraPrize(players []Player, results GameTypeResult, prize decimal.Decimal, drawings GameResults) Winner {
@@ -165,5 +165,5 @@ func CheckPrizesPozoExtraPrize(players []Player, results GameTypeResult, prize d
 			winners = append(winners, p)
 		}
 	}
-	return GetWinner(results.GameType, winners, prize)
+	return GetWinners(results.GameType, PTPE_Prize, winners, prize)
 }
