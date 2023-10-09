@@ -8,6 +8,6 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.GET("/play", api.StartGame)
+	router.GET("/play", api.Play)
 	router.Run("127.0.0.1:10000")
 }

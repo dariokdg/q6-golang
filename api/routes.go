@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func StartGame(c *gin.Context) {
+func Play(c *gin.Context) {
 	var players []models.Player
 
 	//check if we want to include a custom player in the game
