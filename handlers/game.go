@@ -11,7 +11,7 @@ func ExecuteGame(players []models.Player) models.Game {
 	sales := utils.CalculateTotalSales(players)
 	utils.PrintTotalSales(sales)
 
-	prizes := models.GetPrizes(sales.TotalTradicionalSales, sales.TotalRevanchaSales, sales.TotalSiempreSaleSales)
+	prizes := models.GetPrizes(sales.TradicionalSales, sales.RevanchaSales, sales.SiempreSaleSales)
 	utils.PrintPrizes(prizes)
 
 	drawings := utils.ExecuteGames(players)

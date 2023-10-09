@@ -2,13 +2,13 @@ package models
 
 import "github.com/shopspring/decimal"
 
-type GameSpends struct {
+type Spends struct {
 	TradicionalSpends decimal.Decimal `json:"tradicionalSpends"`
 	RevanchaSpends    decimal.Decimal `json:"revanchaSpends"`
 	SiempreSaleSpends decimal.Decimal `json:"siempreSaleSpends"`
 }
 
-func GetTotalSpends(totalSpends decimal.Decimal, games GameParticipation) GameSpends {
+func GetTotalSpends(totalSpends decimal.Decimal, games GameParticipation) Spends {
 	var TS decimal.Decimal
 	var RS decimal.Decimal
 	var SSS decimal.Decimal
@@ -34,9 +34,9 @@ func GetTotalSpends(totalSpends decimal.Decimal, games GameParticipation) GameSp
 		RS = zero
 		SSS = zero
 	}
-	return GameSpends{TS, RS, SSS}
+	return Spends{TS, RS, SSS}
 }
 
-func CheckPlayerSpends(p Player) GameSpends {
-	return GetTotalSpends(p.MoneySpent, p.Quini6Ticket.Games)
+func CheckPlayerSpends(p Player) Spends {
+	return GetTotalSpends(p.MoneySpent, p.Quini6Ticket.Participation)
 }

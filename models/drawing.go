@@ -6,7 +6,7 @@ import (
 	"github.com/Pallinder/go-randomdata"
 )
 
-type DrawingResult struct {
+type Drawing struct {
 	FirstNumber  int `json:"firstNumber"`
 	SecondNumber int `json:"secondNumber"`
 	ThirdNumber  int `json:"thirdNumber"`
@@ -15,8 +15,8 @@ type DrawingResult struct {
 	SixthNumber  int `json:"sixthNumber"`
 }
 
-func GenerateDrawing() DrawingResult {
-	var dR DrawingResult
+func GenerateDrawing() Drawing {
+	var dR Drawing
 	dR.FirstNumber = getFirstNumber(&dR)
 	dR.SecondNumber = getSecondNumber(&dR)
 	dR.ThirdNumber = getThirdNumber(&dR)
@@ -26,11 +26,11 @@ func GenerateDrawing() DrawingResult {
 	return dR
 }
 
-func getFirstNumber(dR *DrawingResult) int {
+func getFirstNumber(dR *Drawing) int {
 	return getQ6Number()
 }
 
-func getSecondNumber(dR *DrawingResult) int {
+func getSecondNumber(dR *Drawing) int {
 	keepRunning := true
 	var secondNumber int
 	drawingResultNumbers := []int{dR.FirstNumber}
@@ -43,7 +43,7 @@ func getSecondNumber(dR *DrawingResult) int {
 	return secondNumber
 }
 
-func getThirdNumber(dR *DrawingResult) int {
+func getThirdNumber(dR *Drawing) int {
 	keepRunning := true
 	var thirdNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber}
@@ -56,7 +56,7 @@ func getThirdNumber(dR *DrawingResult) int {
 	return thirdNumber
 }
 
-func getFourthNumber(dR *DrawingResult) int {
+func getFourthNumber(dR *Drawing) int {
 	keepRunning := true
 	var fourthNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber, dR.ThirdNumber}
@@ -69,7 +69,7 @@ func getFourthNumber(dR *DrawingResult) int {
 	return fourthNumber
 }
 
-func getFifthNumber(dR *DrawingResult) int {
+func getFifthNumber(dR *Drawing) int {
 	keepRunning := true
 	var fifthNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber, dR.ThirdNumber, dR.FourthNumber}
@@ -82,7 +82,7 @@ func getFifthNumber(dR *DrawingResult) int {
 	return fifthNumber
 }
 
-func getSixthNumber(dR *DrawingResult) int {
+func getSixthNumber(dR *Drawing) int {
 	keepRunning := true
 	var sixthNumber int
 	drawingResultNumbers := []int{dR.FirstNumber, dR.SecondNumber, dR.ThirdNumber, dR.FourthNumber, dR.FifthNumber}

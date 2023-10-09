@@ -1,8 +1,8 @@
 package models
 
 type Game struct {
-	TotalSales TotalSales     `json:"sales"`
-	Prizes     PrizeGenerator `json:"prizes"`
-	Results    GameResults    `json:"results"`
-	Winners    []Winner       `json:"winners"`
+	TotalSales Sales     `json:"sales"`
+	Prizes     Prizes    `json:"prizes"`
+	Results    Q6Results `json:"results"`
+	Winners    []Winners `json:"winners"`
 }

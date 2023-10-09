@@ -2,7 +2,7 @@ package models
 
 import "github.com/shopspring/decimal"
 
-type PrizeGenerator struct {
+type Prizes struct {
 	TotalTradicionalSales  decimal.Decimal `json:"totalTradicionalSales"`
 	TotalRevanchaSales     decimal.Decimal `json:"totalRevanchaSales"`
 	TotalSiempreSaleSales  decimal.Decimal `json:"totalSiempreSaleSales"`
@@ -17,7 +17,7 @@ type PrizeGenerator struct {
 	PozoExtraPrize         decimal.Decimal `json:"pozoExtraPrize"`
 }
 
-func GetPrizes(totalTradicionalSales decimal.Decimal, totalRevanchaSales decimal.Decimal, totalSiempreSaleSales decimal.Decimal) PrizeGenerator {
+func GetPrizes(totalTradicionalSales decimal.Decimal, totalRevanchaSales decimal.Decimal, totalSiempreSaleSales decimal.Decimal) Prizes {
 	pOne := decimal.NewFromFloat(0.1)
 	pFour := decimal.NewFromFloat(0.4)
 	pFive := decimal.NewFromFloat(0.5)
@@ -42,5 +42,5 @@ func GetPrizes(totalTradicionalSales decimal.Decimal, totalRevanchaSales decimal
 	tempThree := totalRevanchaSales.Mul(pNine).Mul(pSix).Mul(decimal.NewFromFloat(0.192))
 	tempFour := totalSiempreSaleSales.Mul(pNine).Mul(pSix).Mul(pFour)
 	pePrize := decimal.Sum(tempOne, tempTwo, tempThree, tempFour)
-	return PrizeGenerator{TotalTradicionalSales: totalTradicionalSales, TotalRevanchaSales: totalRevanchaSales, TotalSiempreSaleSales: totalSiempreSaleSales, TradicionalFirstPrize: tFirstPrize, TradicionalSecondPrize: tSecondPrize, TradicionalThirdPrize: tThirdPrize, SegundaFirstPrize: sFirstPrize, SegundaSecondPrize: sSecondPrize, SegundaThirdPrize: sThirdPrize, RevanchaPrize: rPrize, SiempreSalePrize: ssPrize, PozoExtraPrize: pePrize}
+	return Prizes{TotalTradicionalSales: totalTradicionalSales, TotalRevanchaSales: totalRevanchaSales, TotalSiempreSaleSales: totalSiempreSaleSales, TradicionalFirstPrize: tFirstPrize, TradicionalSecondPrize: tSecondPrize, TradicionalThirdPrize: tThirdPrize, SegundaFirstPrize: sFirstPrize, SegundaSecondPrize: sSecondPrize, SegundaThirdPrize: sThirdPrize, RevanchaPrize: rPrize, SiempreSalePrize: ssPrize, PozoExtraPrize: pePrize}
 }

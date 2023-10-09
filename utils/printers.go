@@ -13,22 +13,22 @@ func PrintProgramStartup() {
 	fmt.Println("Starting game...")
 }
 
-func PrintTotalSales(tS models.TotalSales) {
+func PrintTotalSales(tS models.Sales) {
 	fmt.Println("--------------------------------------------")
 	fmt.Printf("TOTAL NUMBER OF PLAYERS: %d\n", models.GetTotalGamePlayers(tS))
-	fmt.Printf("    > TRADICIONAL PLAYERS: %d\n", tS.TotalTradicionalPlayers)
-	fmt.Printf("    > REVANCHA PLAYERS: %d\n", tS.TotalRevanchaPlayers)
-	fmt.Printf("    > SIEMPRE SALE PLAYERS: %d\n", tS.TotalSiempreSalePlayers)
+	fmt.Printf("    > TRADICIONAL PLAYERS: %d\n", tS.TradicionalPlayers)
+	fmt.Printf("    > REVANCHA PLAYERS: %d\n", tS.RevanchaPlayers)
+	fmt.Printf("    > SIEMPRE SALE PLAYERS: %d\n", tS.SiempreSalePlayers)
 	fmt.Println("--------------------------------------------")
 	fmt.Println("\n--------------------------------------------")
 	fmt.Printf("TOTAL SALES: $ %s\n", models.GetTotalGameSales(tS))
-	fmt.Printf("    > TRADICIONAL SALES: $ %s\n", tS.TotalTradicionalSales)
-	fmt.Printf("    > REVANCHA SALES: $ %s\n", tS.TotalRevanchaSales)
-	fmt.Printf("    > SIEMPRE SALE SALES: $ %s\n", tS.TotalSiempreSaleSales)
+	fmt.Printf("    > TRADICIONAL SALES: $ %s\n", tS.TradicionalSales)
+	fmt.Printf("    > REVANCHA SALES: $ %s\n", tS.RevanchaSales)
+	fmt.Printf("    > SIEMPRE SALE SALES: $ %s\n", tS.SiempreSaleSales)
 	fmt.Println("--------------------------------------------")
 }
 
-func PrintPrizes(pG models.PrizeGenerator) {
+func PrintPrizes(pG models.Prizes) {
 	fmt.Println("")
 	t := table.NewWriter()
 	t.SetTitle("QUINI 6 PRIZE LIST")
@@ -56,7 +56,7 @@ func PrintPrizes(pG models.PrizeGenerator) {
 
 }
 
-func PrintDrawingResults(gR models.GameResults) {
+func PrintDrawingResults(gR models.Q6Results) {
 
 	GTRT := gR.GTRT
 	GTRS := gR.GTRS
@@ -116,14 +116,14 @@ func PrintDrawingResults(gR models.GameResults) {
 	t2.Render()
 }
 
-func getCorrectValue(g models.GameTypeResult, index int) string {
+func getCorrectValue(g models.Result, index int) string {
 	if len(g.DrawingResults) > index {
 		return strconv.Itoa(g.DrawingResults[index-1])
 	}
 	return " "
 }
 
-func PrintWinners(drawings models.GameResults, pG models.PrizeGenerator, winners []models.Winner) {
+func PrintWinners(drawings models.Q6Results, pG models.Prizes, winners []models.Winners) {
 	tFP_winners := winners[0]
 	tSP_winners := winners[1]
 	tTP_winners := winners[2]

@@ -1,6 +1,6 @@
 package models
 
-type GameTypeResult struct {
+type Result struct {
 	GameType       GameType `json:"gameType"`
 	DrawingResults []int    `json:"drawingResults"`
 }

@@ -3,9 +3,9 @@ package models
 import "github.com/shopspring/decimal"
 
 type Ticket struct {
-	SelectedNumbers []int             `json:"selectedNumbers"`
-	Games           GameParticipation `json:"gameParticipation"`
-	Cost            decimal.Decimal   `json:"cost"`
+	Numbers       []int             `json:"numbers"`
+	Participation GameParticipation `json:"participation"`
+	Cost          decimal.Decimal   `json:"cost"`
 }
 
 func GetTicket(SelectedNumbers []int, Games GameParticipation) Ticket {

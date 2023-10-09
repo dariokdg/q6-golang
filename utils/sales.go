@@ -6,7 +6,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-func CalculateTotalSales(players []models.Player) models.TotalSales {
+func CalculateTotalSales(players []models.Player) models.Sales {
 	totalTradicionalSales := decimal.NewFromInt(0)
 	totalTradicionalPlayers := 0
 	totalRevanchaSales := decimal.NewFromInt(0)
@@ -26,5 +26,5 @@ func CalculateTotalSales(players []models.Player) models.TotalSales {
 			totalTradicionalPlayers++
 		}
 	}
-	return models.TotalSales{TotalTradicionalSales: totalTradicionalSales, TotalTradicionalPlayers: totalTradicionalPlayers, TotalRevanchaSales: totalRevanchaSales, TotalRevanchaPlayers: totalRevanchaPlayers, TotalSiempreSaleSales: totalSiempreSaleSales, TotalSiempreSalePlayers: totalSiempreSalePlayers}
+	return models.Sales{TradicionalSales: totalTradicionalSales, TradicionalPlayers: totalTradicionalPlayers, RevanchaSales: totalRevanchaSales, RevanchaPlayers: totalRevanchaPlayers, SiempreSaleSales: totalSiempreSaleSales, SiempreSalePlayers: totalSiempreSalePlayers}
 }
