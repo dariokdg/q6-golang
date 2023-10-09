@@ -13,19 +13,46 @@ func PrintProgramStartup() {
 	fmt.Println("Starting game...")
 }
 
+func PrintTotalPlayers(tP models.Players) {
+	//fmt.Println("--------------------------------------------")
+	//fmt.Printf("TOTAL NUMBER OF PLAYERS: %d\n", models.GetTotalGamePlayers(tP))
+	//fmt.Printf("    > TRADICIONAL PLAYERS: %d\n", tP.TPlayers)
+	//fmt.Printf("    > REVANCHA PLAYERS: %d\n", tP.TRPlayers)
+	//fmt.Printf("    > SIEMPRE SALE PLAYERS: %d\n", tP.TRSSPlayers)
+	//fmt.Println("--------------------------------------------")
+	fmt.Println("")
+	t := table.NewWriter()
+	t.SetTitle("PLAYERS")
+	t.Style().Options.DrawBorder = true
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"TOTAL PLAYERS", models.GetTotalGamePlayers(tP)})
+	t.AppendRow([]interface{}{"TRADICIONAL ONLY PLAYERS", tP.TPlayers})
+	t.AppendSeparator()
+	t.AppendRow([]interface{}{"TRADICIONAL AND REVANCHA PLAYERS", tP.TRPlayers})
+	t.AppendSeparator()
+	t.AppendFooter(table.Row{"TRADICIONAL, REVANCHA AND SIEMPRE SALE PLAYERS", tP.TRSSPlayers})
+	t.Render()
+}
+
 func PrintTotalSales(tS models.Sales) {
-	fmt.Println("--------------------------------------------")
-	fmt.Printf("TOTAL NUMBER OF PLAYERS: %d\n", models.GetTotalGamePlayers(tS))
-	fmt.Printf("    > TRADICIONAL PLAYERS: %d\n", tS.TradicionalPlayers)
-	fmt.Printf("    > REVANCHA PLAYERS: %d\n", tS.RevanchaPlayers)
-	fmt.Printf("    > SIEMPRE SALE PLAYERS: %d\n", tS.SiempreSalePlayers)
-	fmt.Println("--------------------------------------------")
-	fmt.Println("\n--------------------------------------------")
-	fmt.Printf("TOTAL SALES: $ %s\n", models.GetTotalGameSales(tS))
-	fmt.Printf("    > TRADICIONAL SALES: $ %s\n", tS.TradicionalSales)
-	fmt.Printf("    > REVANCHA SALES: $ %s\n", tS.RevanchaSales)
-	fmt.Printf("    > SIEMPRE SALE SALES: $ %s\n", tS.SiempreSaleSales)
-	fmt.Println("--------------------------------------------")
+	//fmt.Println("\n--------------------------------------------")
+	//fmt.Printf("TOTAL SALES: $ %s\n", models.GetTotalGameSales(tS))
+	//fmt.Printf("    > TRADICIONAL SALES: $ %s\n", tS.TSales)
+	//fmt.Printf("    > REVANCHA SALES: $ %s\n", tS.TRSales)
+	//fmt.Printf("    > SIEMPRE SALE SALES: $ %s\n", tS.TRSSSales)
+	//fmt.Println("--------------------------------------------")
+	fmt.Println("")
+	t := table.NewWriter()
+	t.SetTitle("SALES")
+	t.Style().Options.DrawBorder = true
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"TOTAL SALES", "$ " + models.GetTotalGameSales(tS).Round(2).String()})
+	t.AppendRow([]interface{}{"TRADICIONAL ONLY SALES", "$ " + tS.TSales.Round(2).String()})
+	t.AppendSeparator()
+	t.AppendRow([]interface{}{"TRADICIONAL AND REVANCHA SALES", "$ " + tS.TRSales.Round(2).String()})
+	t.AppendSeparator()
+	t.AppendFooter(table.Row{"TRADICIONAL, REVANCHA AND SIEMPRE SALE SALES", "$ " + tS.TRSSSales.Round(2).String()})
+	t.Render()
 }
 
 func PrintPrizes(pG models.Prizes) {
@@ -53,7 +80,6 @@ func PrintPrizes(pG models.Prizes) {
 	t.AppendSeparator()
 	t.AppendFooter(table.Row{"POZO EXTRA", "MAIN PRIZE", "6", "$ " + pG.PozoExtraPrize.Round(2).String()})
 	t.Render()
-
 }
 
 func PrintDrawingResults(gR models.Q6Results) {

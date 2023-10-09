@@ -25,22 +25,22 @@ func GetPrizes(totalTradicionalSales decimal.Decimal, totalRevanchaSales decimal
 	pSeven := decimal.NewFromFloat(0.7)
 	pEight := decimal.NewFromFloat(0.8)
 	pNine := decimal.NewFromFloat(0.9)
-	tFirstPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pSeven)
-	tSecondPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pOne)
-	tThirdPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.03))
+	tFirstPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pSeven).Round(2)
+	tSecondPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pOne).Round(2)
+	tThirdPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.03)).Round(2)
 
-	sFirstPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pSeven)
-	sSecondPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pOne)
-	sThirdPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.03))
+	sFirstPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pSeven).Round(2)
+	sSecondPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(pOne).Round(2)
+	sThirdPrize := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.03)).Round(2)
 
-	rPrize := totalRevanchaSales.Mul(pNine).Mul(pSix).Mul(pEight)
+	rPrize := totalRevanchaSales.Mul(pNine).Mul(pSix).Mul(pEight).Round(2)
 
-	ssPrize := totalSiempreSaleSales.Mul(pNine).Mul(pSix).Mul(pSix)
+	ssPrize := totalSiempreSaleSales.Mul(pNine).Mul(pSix).Mul(pSix).Round(2)
 
-	tempOne := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.163))
-	tempTwo := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.163))
-	tempThree := totalRevanchaSales.Mul(pNine).Mul(pSix).Mul(decimal.NewFromFloat(0.192))
-	tempFour := totalSiempreSaleSales.Mul(pNine).Mul(pSix).Mul(pFour)
-	pePrize := decimal.Sum(tempOne, tempTwo, tempThree, tempFour)
+	tempOne := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.163)).Round(2)
+	tempTwo := totalTradicionalSales.Mul(pFive).Mul(pFour).Mul(decimal.NewFromFloat(0.163)).Round(2)
+	tempThree := totalRevanchaSales.Mul(pNine).Mul(pSix).Mul(decimal.NewFromFloat(0.192)).Round(2)
+	tempFour := totalSiempreSaleSales.Mul(pNine).Mul(pSix).Mul(pFour).Round(2)
+	pePrize := decimal.Sum(tempOne, tempTwo, tempThree, tempFour).Round(2)
 	return Prizes{TotalTradicionalSales: totalTradicionalSales, TotalRevanchaSales: totalRevanchaSales, TotalSiempreSaleSales: totalSiempreSaleSales, TradicionalFirstPrize: tFirstPrize, TradicionalSecondPrize: tSecondPrize, TradicionalThirdPrize: tThirdPrize, SegundaFirstPrize: sFirstPrize, SegundaSecondPrize: sSecondPrize, SegundaThirdPrize: sThirdPrize, RevanchaPrize: rPrize, SiempreSalePrize: ssPrize, PozoExtraPrize: pePrize}
 }

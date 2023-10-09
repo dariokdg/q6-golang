@@ -16,7 +16,7 @@ func CheckPrizesTradicionalFirstPrize(players []models.Player, results models.Re
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTT_FirstPrize, 6, winners, prize)
+	return models.GetWinners(results.GameType, models.PTT_FirstPrize, 6, winners, prize.Round(2))
 }
 
 func CheckPrizesTradicionalSecondPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
@@ -29,7 +29,7 @@ func CheckPrizesTradicionalSecondPrize(players []models.Player, results models.R
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTT_SecondPrize, 5, winners, prize)
+	return models.GetWinners(results.GameType, models.PTT_SecondPrize, 5, winners, prize.Round(2))
 }
 
 func CheckPrizesTradicionalThirdPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
@@ -42,7 +42,7 @@ func CheckPrizesTradicionalThirdPrize(players []models.Player, results models.Re
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTT_ThirdPrize, 4, winners, prize)
+	return models.GetWinners(results.GameType, models.PTT_ThirdPrize, 4, winners, prize.Round(2))
 }
 
 func CheckPrizesSegundaFirstPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
@@ -55,7 +55,7 @@ func CheckPrizesSegundaFirstPrize(players []models.Player, results models.Result
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTS_FirstPrize, 6, winners, prize)
+	return models.GetWinners(results.GameType, models.PTS_FirstPrize, 6, winners, prize.Round(2))
 }
 
 func CheckPrizesSegundaSecondPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
@@ -68,7 +68,7 @@ func CheckPrizesSegundaSecondPrize(players []models.Player, results models.Resul
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTS_SecondPrize, 5, winners, prize)
+	return models.GetWinners(results.GameType, models.PTS_SecondPrize, 5, winners, prize.Round(2))
 }
 
 func CheckPrizesSegundaThirdPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
@@ -81,7 +81,7 @@ func CheckPrizesSegundaThirdPrize(players []models.Player, results models.Result
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTS_ThirdPrize, 4, winners, prize)
+	return models.GetWinners(results.GameType, models.PTS_ThirdPrize, 4, winners, prize.Round(2))
 }
 
 func CheckPrizesRevanchaPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
@@ -94,7 +94,7 @@ func CheckPrizesRevanchaPrize(players []models.Player, results models.Result, pr
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTR_Prize, 6, winners, prize)
+	return models.GetWinners(results.GameType, models.PTR_Prize, 6, winners, prize.Round(2))
 }
 
 func CheckPrizesSiempreSalePrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
@@ -125,22 +125,22 @@ func CheckPrizesSiempreSalePrize(players []models.Player, results models.Result,
 	}
 	if len(sixMatches) > 0 {
 		winners = append(winners, sixMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 6, winners, prize)
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 6, winners, prize.Round(2))
 	} else if len(fiveMatches) > 0 {
 		winners = append(winners, fiveMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 5, winners, prize)
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 5, winners, prize.Round(2))
 	} else if len(fourMatches) > 0 {
 		winners = append(winners, fourMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 4, winners, prize)
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 4, winners, prize.Round(2))
 	} else if len(threeMatches) > 0 {
 		winners = append(winners, threeMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 3, winners, prize)
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 3, winners, prize.Round(2))
 	} else if len(twoMatches) > 0 {
 		winners = append(winners, twoMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 2, winners, prize)
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 2, winners, prize.Round(2))
 	} else {
 		winners = append(winners, oneMatch...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 1, winners, prize)
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 1, winners, prize.Round(2))
 	}
 
 }
@@ -174,7 +174,7 @@ func CheckPrizesPozoExtraPrize(players []models.Player, results models.Result, p
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTPE_Prize, 6, winners, prize)
+	return models.GetWinners(results.GameType, models.PTPE_Prize, 6, winners, prize.Round(2))
 }
 
 func CheckMatches(numberOfMatches int) models.Matches {

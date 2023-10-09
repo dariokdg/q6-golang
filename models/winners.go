@@ -21,8 +21,8 @@ func GetWinners(gameType GameType, prizeType PrizeType, numberOfMatches int, win
 	}
 	var updatedPlayers []Player
 	for _, updatedPlayer := range winners {
-		updatedPlayer.PrizeMoney = decimal.Sum(updatedPlayer.PrizeMoney, prizeAmountPerWinner)
+		updatedPlayer.PrizeMoney = decimal.Sum(updatedPlayer.PrizeMoney, prizeAmountPerWinner.Round(2))
 		updatedPlayers = append(updatedPlayers, updatedPlayer)
 	}
-	return Winners{gameType, prizeType, numberOfMatches, updatedPlayers, prizeAmountPerWinner}
+	return Winners{gameType, prizeType, numberOfMatches, updatedPlayers, prizeAmountPerWinner.Round(2)}
 }
