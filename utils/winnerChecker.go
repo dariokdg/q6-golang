@@ -1,0 +1,33 @@
+package utils
+
+import "q6-golang/models"
+
+func CalculateWinners(players []models.Player, drawings models.GameResults, pG models.PrizeGenerator) []models.Winner {
+	tFP_winners := CheckPrizesTradicionalFirstPrize(players, drawings.GTRT, pG.TradicionalFirstPrize)
+	tSP_winners := CheckPrizesTradicionalSecondPrize(players, drawings.GTRT, pG.TradicionalSecondPrize)
+	tTP_winners := CheckPrizesTradicionalThirdPrize(players, drawings.GTRT, pG.TradicionalThirdPrize)
+
+	sFP_winners := CheckPrizesSegundaFirstPrize(players, drawings.GTRS, pG.SegundaFirstPrize)
+	sSP_winners := CheckPrizesSegundaSecondPrize(players, drawings.GTRS, pG.SegundaSecondPrize)
+	sTP_winners := CheckPrizesSegundaThirdPrize(players, drawings.GTRS, pG.SegundaThirdPrize)
+
+	var validRevanchaPlayers []models.Player
+	for _, p := range players {
+		if p.Quini6Ticket.Games == models.GP_TradicionalAndRevancha || p.Quini6Ticket.Games == models.GP_TradicionalAndRevanchaAndSiempreSale {
+			validRevanchaPlayers = append(validRevanchaPlayers, p)
+		}
+	}
+	r_winners := CheckPrizesRevanchaPrize(validRevanchaPlayers, drawings.GTRR, pG.RevanchaPrize)
+
+	var validSiempreSalePlayers []models.Player
+	for _, p := range players {
+		if p.Quini6Ticket.Games == models.GP_TradicionalAndRevancha || p.Quini6Ticket.Games == models.GP_TradicionalAndRevanchaAndSiempreSale {
+			validSiempreSalePlayers = append(validSiempreSalePlayers, p)
+		}
+	}
+	sS_winners := CheckPrizesSiempreSalePrize(validSiempreSalePlayers, drawings.GTRSS, pG.SiempreSalePrize)
+
+	pE_winners := CheckPrizesPozoExtraPrize(players, drawings.GTRPE, pG.PozoExtraPrize, drawings)
+
+	return []models.Winner{tFP_winners, tSP_winners, tTP_winners, sFP_winners, sSP_winners, sTP_winners, r_winners, sS_winners, pE_winners}
+}

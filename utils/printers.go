@@ -9,6 +9,10 @@ import (
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 
+func PrintProgramStartup() {
+	fmt.Println("Starting game...")
+}
+
 func PrintTotalSales(tS models.TotalSales) {
 	fmt.Println("--------------------------------------------")
 	fmt.Printf("TOTAL NUMBER OF PLAYERS: %d\n", models.GetTotalGamePlayers(tS))
