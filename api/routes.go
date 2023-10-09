@@ -29,6 +29,11 @@ func Play(c *gin.Context) {
 		players = append(players, utils.GenerateFakePlayers(100)...)
 	}
 
-	Quini6Game := handlers.ExecuteGame(players)
-	c.IndentedJSON(http.StatusOK, Quini6Game)
+	pTest, isTest := c.GetQuery("test")
+	if isTest && pTest == "true" {
+		handlers.ExecuteGame(players)
+	} else {
+		Quini6Game := handlers.ExecuteGame(players)
+		c.IndentedJSON(http.StatusOK, Quini6Game)
+	}
 }

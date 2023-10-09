@@ -11,7 +11,7 @@ func CheckPrizesTradicionalFirstPrize(players []models.Player, results models.Re
 	var winners []models.Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesTradicional(numberOfMatches)
+		prizeType := CheckPrizeTradicional(numberOfMatches)
 		if prizeType == models.PTT_FirstPrize {
 			winners = append(winners, p)
 		}
@@ -24,7 +24,7 @@ func CheckPrizesTradicionalSecondPrize(players []models.Player, results models.R
 	var winners []models.Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesTradicional(numberOfMatches)
+		prizeType := CheckPrizeTradicional(numberOfMatches)
 		if prizeType == models.PTT_SecondPrize {
 			winners = append(winners, p)
 		}
@@ -37,7 +37,7 @@ func CheckPrizesTradicionalThirdPrize(players []models.Player, results models.Re
 	var winners []models.Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesTradicional(numberOfMatches)
+		prizeType := CheckPrizeTradicional(numberOfMatches)
 		if prizeType == models.PTT_ThirdPrize {
 			winners = append(winners, p)
 		}
@@ -50,7 +50,7 @@ func CheckPrizesSegundaFirstPrize(players []models.Player, results models.Result
 	var winners []models.Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesSegunda(numberOfMatches)
+		prizeType := CheckPrizeSegunda(numberOfMatches)
 		if prizeType == models.PTS_FirstPrize {
 			winners = append(winners, p)
 		}
@@ -63,7 +63,7 @@ func CheckPrizesSegundaSecondPrize(players []models.Player, results models.Resul
 	var winners []models.Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesSegunda(numberOfMatches)
+		prizeType := CheckPrizeSegunda(numberOfMatches)
 		if prizeType == models.PTS_SecondPrize {
 			winners = append(winners, p)
 		}
@@ -76,7 +76,7 @@ func CheckPrizesSegundaThirdPrize(players []models.Player, results models.Result
 	var winners []models.Player
 	for _, p := range players {
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesSegunda(numberOfMatches)
+		prizeType := CheckPrizeSegunda(numberOfMatches)
 		if prizeType == models.PTS_ThirdPrize {
 			winners = append(winners, p)
 		}
@@ -88,10 +88,12 @@ func CheckPrizesRevanchaPrize(players []models.Player, results models.Result, pr
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
-		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesRevancha(numberOfMatches)
-		if prizeType == models.PTR_Prize {
-			winners = append(winners, p)
+		if p.Quini6Ticket.Participation == models.GP_TradicionalAndRevancha || p.Quini6Ticket.Participation == models.GP_TradicionalAndRevanchaAndSiempreSale {
+			numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
+			prizeType := CheckPrizeRevancha(numberOfMatches)
+			if prizeType == models.PTR_Prize {
+				winners = append(winners, p)
+			}
 		}
 	}
 	return models.GetWinners(results.GameType, models.PTR_Prize, 6, winners, prize.Round(2))
@@ -106,43 +108,44 @@ func CheckPrizesSiempreSalePrize(players []models.Player, results models.Result,
 	var twoMatches []models.Player
 	var oneMatch []models.Player
 	var winners []models.Player
+	skip := 0
 	for _, p := range players {
-		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesSiempreSale(numberOfMatches)
-		if prizeType == 6 {
-			sixMatches = append(winners, p)
-		} else if prizeType == 5 {
-			fiveMatches = append(winners, p)
-		} else if prizeType == 4 {
-			fourMatches = append(winners, p)
-		} else if prizeType == 3 {
-			threeMatches = append(winners, p)
-		} else if prizeType == 2 {
-			twoMatches = append(winners, p)
-		} else if prizeType == 1 {
-			oneMatch = append(winners, p)
+		if p.Quini6Ticket.Participation == models.GP_TradicionalAndRevancha || p.Quini6Ticket.Participation == models.GP_TradicionalAndRevanchaAndSiempreSale {
+			numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
+			if numberOfMatches == 6 {
+				sixMatches = append(winners, p)
+				skip = 6
+			} else if numberOfMatches == 5 && skip <= 5 {
+				fiveMatches = append(winners, p)
+				skip = 5
+			} else if numberOfMatches == 4 && skip <= 4 {
+				fourMatches = append(winners, p)
+				skip = 4
+			} else if numberOfMatches == 3 && skip <= 3 {
+				threeMatches = append(winners, p)
+				skip = 3
+			} else if numberOfMatches == 2 && skip <= 2 {
+				twoMatches = append(winners, p)
+				skip = 2
+			} else if numberOfMatches == 1 && skip <= 1 {
+				oneMatch = append(winners, p)
+				skip = 1
+			}
 		}
 	}
 	if len(sixMatches) > 0 {
-		winners = append(winners, sixMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 6, winners, prize.Round(2))
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 6, sixMatches, prize.Round(2))
 	} else if len(fiveMatches) > 0 {
-		winners = append(winners, fiveMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 5, winners, prize.Round(2))
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 5, fiveMatches, prize.Round(2))
 	} else if len(fourMatches) > 0 {
-		winners = append(winners, fourMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 4, winners, prize.Round(2))
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 4, fourMatches, prize.Round(2))
 	} else if len(threeMatches) > 0 {
-		winners = append(winners, threeMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 3, winners, prize.Round(2))
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 3, threeMatches, prize.Round(2))
 	} else if len(twoMatches) > 0 {
-		winners = append(winners, twoMatches...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 2, winners, prize.Round(2))
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 2, twoMatches, prize.Round(2))
 	} else {
-		winners = append(winners, oneMatch...)
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 1, winners, prize.Round(2))
+		return models.GetWinners(results.GameType, models.PTSS_Prize, 1, oneMatch, prize.Round(2))
 	}
-
 }
 
 func CheckPrizesPozoExtraPrize(players []models.Player, results models.Result, prize decimal.Decimal, drawings models.Q6Results) models.Winners {
@@ -169,7 +172,7 @@ func CheckPrizesPozoExtraPrize(players []models.Player, results models.Result, p
 			}
 		}
 		numberOfMatches := GetNumberOfMatches(p.Quini6Ticket.Numbers, drawing)
-		prizeType := CheckMatchesPozoExtra(numberOfMatches)
+		prizeType := CheckPrizePozoExtra(numberOfMatches)
 		if prizeType == models.PTPE_Prize {
 			winners = append(winners, p)
 		}
@@ -198,7 +201,7 @@ func CheckMatches(numberOfMatches int) models.Matches {
 	}
 }
 
-func CheckMatchesTradicional(numberOfMatches int) models.PrizeType {
+func CheckPrizeTradicional(numberOfMatches int) models.PrizeType {
 	tradicionalMatches := CheckMatches(numberOfMatches)
 	switch tradicionalMatches {
 	case models.M_SixMatches:
@@ -220,7 +223,7 @@ func CheckMatchesTradicional(numberOfMatches int) models.PrizeType {
 	}
 }
 
-func CheckMatchesSegunda(numberOfMatches int) models.PrizeType {
+func CheckPrizeSegunda(numberOfMatches int) models.PrizeType {
 	segundaMatches := CheckMatches(numberOfMatches)
 	switch segundaMatches {
 	case models.M_SixMatches:
@@ -242,7 +245,7 @@ func CheckMatchesSegunda(numberOfMatches int) models.PrizeType {
 	}
 }
 
-func CheckMatchesRevancha(numberOfMatches int) models.PrizeType {
+func CheckPrizeRevancha(numberOfMatches int) models.PrizeType {
 	revanchaMatches := CheckMatches(numberOfMatches)
 	switch revanchaMatches {
 	case models.M_SixMatches:
@@ -264,29 +267,7 @@ func CheckMatchesRevancha(numberOfMatches int) models.PrizeType {
 	}
 }
 
-func CheckMatchesSiempreSale(numberOfMatches int) int {
-	siempreSaleMatches := CheckMatches(numberOfMatches)
-	switch siempreSaleMatches {
-	case models.M_SixMatches:
-		return 6
-	case models.M_FiveMatches:
-		return 5
-	case models.M_FourMatches:
-		return 4
-	case models.M_ThreeMatches:
-		return 3
-	case models.M_TwoMatches:
-		return 2
-	case models.M_OneMatch:
-		return 1
-	case models.M_NoMatches:
-		return 0
-	default:
-		return 0
-	}
-}
-
-func CheckMatchesPozoExtra(numberOfMatches int) models.PrizeType {
+func CheckPrizePozoExtra(numberOfMatches int) models.PrizeType {
 	pozoExtraMatches := CheckMatches(numberOfMatches)
 	switch pozoExtraMatches {
 	case models.M_SixMatches:
