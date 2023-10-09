@@ -8,17 +8,24 @@ import (
 func ExecuteGame(playerList []models.Player) models.Quini6 {
 	utils.PrintProgramStartup()
 
-	sales := utils.CalculateTotalSales(playerList)
-	utils.PrintTotalSales(sales)
+	chPlayers := make(chan models.Players, 1)
+	chSales := make(chan models.Sales, 1)
+	chDrawings := make(chan models.Q6Results, 1)
 
-	players := utils.CalculateTotalPlayers(playerList)
+	go utils.CalculateTotalPlayers(chPlayers, playerList)
+	go utils.CalculateTotalSales(chSales, playerList)
+	go utils.ExecuteGames(chDrawings, playerList)
+
+	players := <-chPlayers
+	sales := <-chSales
+	drawings := <-chDrawings
+
 	utils.PrintTotalPlayers(players)
+	utils.PrintTotalSales(sales)
+	utils.PrintDrawingResults(drawings)
 
 	prizes := models.GetPrizes(sales.TSales, sales.TRSales, sales.TRSSSales)
 	utils.PrintPrizes(prizes)
-
-	drawings := utils.ExecuteGames(playerList)
-	utils.PrintDrawingResults(drawings)
 
 	winners := utils.CalculateWinners(playerList, drawings, prizes)
 	utils.PrintWinners(drawings, prizes, winners)

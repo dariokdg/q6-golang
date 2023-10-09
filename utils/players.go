@@ -6,7 +6,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-func CalculateTotalPlayers(players []models.Player) models.Players {
+func CalculateTotalPlayers(ch chan models.Players, players []models.Player) {
 	totalTradicionalPlayers := 0
 	totalRevanchaPlayers := 0
 	totalSiempreSalePlayers := 0
@@ -20,5 +20,5 @@ func CalculateTotalPlayers(players []models.Player) models.Players {
 			totalTradicionalPlayers++
 		}
 	}
-	return models.Players{TPlayers: totalTradicionalPlayers, TRPlayers: totalRevanchaPlayers, TRSSPlayers: totalSiempreSalePlayers}
+	ch <- models.Players{TPlayers: totalTradicionalPlayers, TRPlayers: totalRevanchaPlayers, TRSSPlayers: totalSiempreSalePlayers}
 }

@@ -6,7 +6,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-func CalculateTotalSales(players []models.Player) models.Sales {
+func CalculateTotalSales(ch chan models.Sales, players []models.Player) {
 	totalTradicionalSales := decimal.NewFromInt(0)
 	totalRevanchaSales := decimal.NewFromInt(0)
 	totalSiempreSaleSales := decimal.NewFromInt(0)
@@ -16,5 +16,5 @@ func CalculateTotalSales(players []models.Player) models.Sales {
 		totalRevanchaSales = totalRevanchaSales.Add(gs.RevanchaSpends)
 		totalSiempreSaleSales = totalSiempreSaleSales.Add(gs.SiempreSaleSpends)
 	}
-	return models.Sales{TSales: totalTradicionalSales, TRSales: totalRevanchaSales, TRSSSales: totalSiempreSaleSales}
+	ch <- models.Sales{TSales: totalTradicionalSales, TRSales: totalRevanchaSales, TRSSSales: totalSiempreSaleSales}
 }

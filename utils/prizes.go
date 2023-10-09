@@ -6,7 +6,7 @@ import (
 	"github.com/shopspring/decimal"
 )
 
-func CheckPrizesTradicionalFirstPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesTradicionalFirstPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
@@ -16,10 +16,10 @@ func CheckPrizesTradicionalFirstPrize(players []models.Player, results models.Re
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTT_FirstPrize, 6, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTT_FirstPrize, 6, winners, prize.Round(2))
 }
 
-func CheckPrizesTradicionalSecondPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesTradicionalSecondPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
@@ -29,10 +29,10 @@ func CheckPrizesTradicionalSecondPrize(players []models.Player, results models.R
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTT_SecondPrize, 5, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTT_SecondPrize, 5, winners, prize.Round(2))
 }
 
-func CheckPrizesTradicionalThirdPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesTradicionalThirdPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
@@ -42,10 +42,10 @@ func CheckPrizesTradicionalThirdPrize(players []models.Player, results models.Re
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTT_ThirdPrize, 4, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTT_ThirdPrize, 4, winners, prize.Round(2))
 }
 
-func CheckPrizesSegundaFirstPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesSegundaFirstPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
@@ -55,10 +55,10 @@ func CheckPrizesSegundaFirstPrize(players []models.Player, results models.Result
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTS_FirstPrize, 6, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTS_FirstPrize, 6, winners, prize.Round(2))
 }
 
-func CheckPrizesSegundaSecondPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesSegundaSecondPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
@@ -68,10 +68,10 @@ func CheckPrizesSegundaSecondPrize(players []models.Player, results models.Resul
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTS_SecondPrize, 5, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTS_SecondPrize, 5, winners, prize.Round(2))
 }
 
-func CheckPrizesSegundaThirdPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesSegundaThirdPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
@@ -81,10 +81,10 @@ func CheckPrizesSegundaThirdPrize(players []models.Player, results models.Result
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTS_ThirdPrize, 4, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTS_ThirdPrize, 4, winners, prize.Round(2))
 }
 
-func CheckPrizesRevanchaPrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesRevanchaPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var winners []models.Player
 	for _, p := range players {
@@ -96,10 +96,10 @@ func CheckPrizesRevanchaPrize(players []models.Player, results models.Result, pr
 			}
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTR_Prize, 6, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTR_Prize, 6, winners, prize.Round(2))
 }
 
-func CheckPrizesSiempreSalePrize(players []models.Player, results models.Result, prize decimal.Decimal) models.Winners {
+func CheckPrizesSiempreSalePrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal) {
 	drawing := results.DrawingResults
 	var sixMatches []models.Player
 	var fiveMatches []models.Player
@@ -134,21 +134,21 @@ func CheckPrizesSiempreSalePrize(players []models.Player, results models.Result,
 		}
 	}
 	if len(sixMatches) > 0 {
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 6, sixMatches, prize.Round(2))
+		ch <- models.GetWinners(results.GameType, models.PTSS_Prize, 6, sixMatches, prize.Round(2))
 	} else if len(fiveMatches) > 0 {
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 5, fiveMatches, prize.Round(2))
+		ch <- models.GetWinners(results.GameType, models.PTSS_Prize, 5, fiveMatches, prize.Round(2))
 	} else if len(fourMatches) > 0 {
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 4, fourMatches, prize.Round(2))
+		ch <- models.GetWinners(results.GameType, models.PTSS_Prize, 4, fourMatches, prize.Round(2))
 	} else if len(threeMatches) > 0 {
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 3, threeMatches, prize.Round(2))
+		ch <- models.GetWinners(results.GameType, models.PTSS_Prize, 3, threeMatches, prize.Round(2))
 	} else if len(twoMatches) > 0 {
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 2, twoMatches, prize.Round(2))
+		ch <- models.GetWinners(results.GameType, models.PTSS_Prize, 2, twoMatches, prize.Round(2))
 	} else {
-		return models.GetWinners(results.GameType, models.PTSS_Prize, 1, oneMatch, prize.Round(2))
+		ch <- models.GetWinners(results.GameType, models.PTSS_Prize, 1, oneMatch, prize.Round(2))
 	}
 }
 
-func CheckPrizesPozoExtraPrize(players []models.Player, results models.Result, prize decimal.Decimal, drawings models.Q6Results) models.Winners {
+func CheckPrizesPozoExtraPrize(ch chan models.Winners, players []models.Player, results models.Result, prize decimal.Decimal, drawings models.Q6Results) {
 
 	//to participate this player must NOT have 6 matches in any of the three main results
 
@@ -177,7 +177,7 @@ func CheckPrizesPozoExtraPrize(players []models.Player, results models.Result, p
 			winners = append(winners, p)
 		}
 	}
-	return models.GetWinners(results.GameType, models.PTPE_Prize, 6, winners, prize.Round(2))
+	ch <- models.GetWinners(results.GameType, models.PTPE_Prize, 6, winners, prize.Round(2))
 }
 
 func CheckMatches(numberOfMatches int) models.Matches {

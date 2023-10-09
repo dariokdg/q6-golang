@@ -5,13 +5,13 @@ import (
 	"sort"
 )
 
-func ExecuteGames(players []models.Player) models.Q6Results {
+func ExecuteGames(ch chan models.Q6Results, players []models.Player) {
 	t := tradicional(players)
 	s := segunda(players)
 	r := revancha(players)
 	ss := siempreSale(players)
 	pe := pozoExtra(players, t.DrawingResults, s.DrawingResults, r.DrawingResults)
-	return models.Q6Results{GTRT: t, GTRS: s, GTRR: r, GTRSS: ss, GTRPE: pe}
+	ch <- models.Q6Results{GTRT: t, GTRS: s, GTRR: r, GTRSS: ss, GTRPE: pe}
 }
 
 func tradicional(players []models.Player) models.Result {
