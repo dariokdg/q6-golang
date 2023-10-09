@@ -18,8 +18,13 @@ func generateFakePlayer() models.Player {
 	name := generateRandomName()
 	age := generateRandomAdultAge()
 	city := generateRandomCity()
-	ticket := generateFakeTicket()
-	return models.GetPlayer(name, age, city, ticket)
+	myPlayer := models.GetPlayer(name, age, city)
+	var tickets []models.Ticket
+	for i := 1; i <= generateRandomNumberOfTickets(); i++ {
+		tickets = append(tickets, generateFakeTicket(myPlayer))
+	}
+	models.AssignTicketsToPlayer(myPlayer, tickets)
+	return myPlayer
 }
 
 func generateRandomName() string {
@@ -34,9 +39,13 @@ func generateRandomCity() string {
 	return randomdata.City()
 }
 
-func generateFakeTicket() models.Ticket {
+func generateRandomNumberOfTickets() int {
+	return randomdata.Number(5) + 1
+}
+
+func generateFakeTicket(player models.Player) models.Ticket {
 	nums := models.GenerateDrawing()
-	t := models.GetTicket([]int{nums.FirstNumber, nums.SecondNumber, nums.ThirdNumber, nums.FourthNumber, nums.FifthNumber, nums.SixthNumber}, generateFakeGameParticipation())
+	t := models.GetTicket([]int{nums.FirstNumber, nums.SecondNumber, nums.ThirdNumber, nums.FourthNumber, nums.FifthNumber, nums.SixthNumber}, generateFakeGameParticipation(), player.ID)
 	return t
 }
 
@@ -52,5 +61,9 @@ func generateFakeGameParticipation() models.GameParticipation {
 }
 
 func GetCustomTestPlayer() models.Player {
-	return models.GetPlayer("Dario De Giacomo", 31, "Arroyo Seco", models.GetTicket([]int{7, 9, 11, 20, 32, 43}, models.GP_TradicionalAndRevanchaAndSiempreSale))
+	var tickets []models.Ticket
+	myPlayer := models.GetPlayer("Dario De Giacomo", 31, "Arroyo Seco")
+	tickets = append(tickets, models.GetTicket([]int{7, 9, 11, 20, 32, 43}, models.GP_TradicionalAndRevanchaAndSiempreSale, myPlayer.ID))
+	models.AssignTicketsToPlayer(myPlayer, tickets)
+	return myPlayer
 }

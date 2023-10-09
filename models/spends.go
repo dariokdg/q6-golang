@@ -38,5 +38,8 @@ func GetTotalSpends(totalSpends decimal.Decimal, games GameParticipation) Spends
 }
 
 func CheckPlayerSpends(p Player) Spends {
+	for _, ticket := range p.Tickets {
+		if ticket.Participation == 
+	}
 	return GetTotalSpends(p.MoneySpent, p.Quini6Ticket.Participation)
 }

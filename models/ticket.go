@@ -1,15 +1,19 @@
 package models
 
-import "github.com/shopspring/decimal"
+import (
+	"github.com/google/uuid"
+	"github.com/shopspring/decimal"
+)
 
 type Ticket struct {
 	Numbers       []int             `json:"numbers"`
 	Participation GameParticipation `json:"participation"`
 	Cost          decimal.Decimal   `json:"cost"`
+	PlayerID      uuid.UUID         `json:"playerUUID"`
 }
 
-func GetTicket(SelectedNumbers []int, Games GameParticipation) Ticket {
-	return Ticket{SelectedNumbers, Games, GetTicketCost(Games)}
+func GetTicket(SelectedNumbers []int, Games GameParticipation, playerUUID uuid.UUID) Ticket {
+	return Ticket{SelectedNumbers, Games, GetTicketCost(Games), playerUUID}
 }
 
 func GetTicketCost(Games GameParticipation) decimal.Decimal {
