@@ -1,6 +1,32 @@
 package utils
 
-import "q6-golang/models"
+import (
+	"q6-golang/models"
+
+	"github.com/shopspring/decimal"
+)
+
+func GetWinners(gameType models.GameType, prizeType models.PrizeType, numberOfMatches int, players []models.Player, winners []models.Ticket, prizeAmountTotal decimal.Decimal) models.Winners {
+	var prizeAmountPerWinner decimal.Decimal
+	numberOfWinners := len(winners)
+	numberOfWinners_d := decimal.NewFromInt(int64(numberOfWinners))
+	if numberOfWinners == 0 {
+		prizeAmountPerWinner = decimal.NewFromInt(0)
+	} else {
+		prizeAmountPerWinner = prizeAmountTotal.Div(numberOfWinners_d)
+	}
+
+	//for each winning ticket, we need to update owner's "prize money"
+	for _, ticket := range winners {
+		UpdatePrizeWinnerMoney(&players, &ticket, prizeAmountPerWinner)
+	}
+	return models.Winners{GameType: gameType, PrizeType: prizeType, NumberOfMatches: numberOfMatches, PrizeWinnerList: winners, PrizeAmountPerWinner: prizeAmountPerWinner.Round(2)}
+}
+
+func UpdatePrizeWinnerMoney(players *[]models.Player, ticket *models.Ticket, prizeAmountPerWinner decimal.Decimal) {
+	player := models.GetTicketOwner(*players, *ticket)
+	player.PrizeMoney = decimal.Sum(player.PrizeMoney, prizeAmountPerWinner).Round(2)
+}
 
 func CalculateWinners(players []models.Player, drawings models.Q6Results, pG models.Prizes) []models.Winners {
 	ch1 := make(chan models.Winners, 1)

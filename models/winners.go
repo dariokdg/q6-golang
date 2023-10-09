@@ -6,23 +6,6 @@ type Winners struct {
 	GameType             GameType        `json:"gameType"`
 	PrizeType            PrizeType       `json:"prizeType"`
 	NumberOfMatches      int             `json:"numberOfMatches"`
-	PrizeWinnerList      []Player        `json:"prizeWinnerList"`
+	PrizeWinnerList      []Ticket        `json:"prizeWinnerList"`
 	PrizeAmountPerWinner decimal.Decimal `json:"prizeAmountPerWinner"`
-}
-
-func GetWinners(gameType GameType, prizeType PrizeType, numberOfMatches int, winners []Player, prizeAmountTotal decimal.Decimal) Winners {
-	var prizeAmountPerWinner decimal.Decimal
-	numberOfWinners := len(winners)
-	numberOfWinners_d := decimal.NewFromInt(int64(numberOfWinners))
-	if numberOfWinners == 0 {
-		prizeAmountPerWinner = decimal.NewFromInt(0)
-	} else {
-		prizeAmountPerWinner = prizeAmountTotal.Div(numberOfWinners_d)
-	}
-	var updatedPlayers []Player
-	for _, updatedPlayer := range winners {
-		updatedPlayer.PrizeMoney = decimal.Sum(updatedPlayer.PrizeMoney, prizeAmountPerWinner.Round(2))
-		updatedPlayers = append(updatedPlayers, updatedPlayer)
-	}
-	return Winners{gameType, prizeType, numberOfMatches, updatedPlayers, prizeAmountPerWinner.Round(2)}
 }

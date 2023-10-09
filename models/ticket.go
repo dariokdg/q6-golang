@@ -16,6 +16,15 @@ func GetTicket(SelectedNumbers []int, Games GameParticipation, playerUUID uuid.U
 	return Ticket{SelectedNumbers, Games, GetTicketCost(Games), playerUUID}
 }
 
+func GetTicketOwner(players []Player, ticket Ticket) Player {
+	for _, player := range players {
+		if player.ID == ticket.PlayerID {
+			return player
+		}
+	}
+	return Player{}
+}
+
 func GetTicketCost(Games GameParticipation) decimal.Decimal {
 	switch Games {
 	case GP_TradicionalOnly:
