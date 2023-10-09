@@ -14,12 +14,6 @@ func PrintProgramStartup() {
 }
 
 func PrintTotalPlayers(tP models.Players) {
-	//fmt.Println("--------------------------------------------")
-	//fmt.Printf("TOTAL NUMBER OF PLAYERS: %d\n", models.GetTotalGamePlayers(tP))
-	//fmt.Printf("    > TRADICIONAL PLAYERS: %d\n", tP.TPlayers)
-	//fmt.Printf("    > REVANCHA PLAYERS: %d\n", tP.TRPlayers)
-	//fmt.Printf("    > SIEMPRE SALE PLAYERS: %d\n", tP.TRSSPlayers)
-	//fmt.Println("--------------------------------------------")
 	fmt.Println("")
 	t := table.NewWriter()
 	t.SetTitle("PLAYERS")
@@ -34,13 +28,22 @@ func PrintTotalPlayers(tP models.Players) {
 	t.Render()
 }
 
+func PrintTotalTickets(tT models.Tickets) {
+	fmt.Println("")
+	t := table.NewWriter()
+	t.SetTitle("TICKETS")
+	t.Style().Options.DrawBorder = true
+	t.SetOutputMirror(os.Stdout)
+	t.AppendHeader(table.Row{"TOTAL TICKETS", models.GetTotalGameTickets(tT)})
+	t.AppendRow([]interface{}{"TRADICIONAL ONLY TICKETS", tT.TTickets})
+	t.AppendSeparator()
+	t.AppendRow([]interface{}{"TRADICIONAL AND REVANCHA TICKETS", tT.TRTickets})
+	t.AppendSeparator()
+	t.AppendFooter(table.Row{"TRADICIONAL, REVANCHA AND SIEMPRE SALE TICKETS", tT.TRSSTickets})
+	t.Render()
+}
+
 func PrintTotalSales(tS models.Sales) {
-	//fmt.Println("\n--------------------------------------------")
-	//fmt.Printf("TOTAL SALES: $ %s\n", models.GetTotalGameSales(tS))
-	//fmt.Printf("    > TRADICIONAL SALES: $ %s\n", tS.TSales)
-	//fmt.Printf("    > REVANCHA SALES: $ %s\n", tS.TRSales)
-	//fmt.Printf("    > SIEMPRE SALE SALES: $ %s\n", tS.TRSSSales)
-	//fmt.Println("--------------------------------------------")
 	fmt.Println("")
 	t := table.NewWriter()
 	t.SetTitle("SALES")

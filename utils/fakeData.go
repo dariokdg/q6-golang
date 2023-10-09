@@ -23,7 +23,7 @@ func generateFakePlayer() models.Player {
 	for i := 1; i <= generateRandomNumberOfTickets(); i++ {
 		tickets = append(tickets, generateFakeTicket(myPlayer))
 	}
-	models.AssignTicketsToPlayer(myPlayer, tickets)
+	models.AssignTicketsToPlayer(&myPlayer, tickets)
 	return myPlayer
 }
 
@@ -64,6 +64,6 @@ func GetCustomTestPlayer() models.Player {
 	var tickets []models.Ticket
 	myPlayer := models.GetPlayer("Dario De Giacomo", 31, "Arroyo Seco")
 	tickets = append(tickets, models.GetTicket([]int{7, 9, 11, 20, 32, 43}, models.GP_TradicionalAndRevanchaAndSiempreSale, myPlayer.ID))
-	models.AssignTicketsToPlayer(myPlayer, tickets)
+	models.AssignTicketsToPlayer(&myPlayer, tickets)
 	return myPlayer
 }

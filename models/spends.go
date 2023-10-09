@@ -1,6 +1,8 @@
 package models
 
-import "github.com/shopspring/decimal"
+import (
+	"github.com/shopspring/decimal"
+)
 
 type Spends struct {
 	TradicionalSpends decimal.Decimal `json:"tradicionalSpends"`
@@ -8,7 +10,7 @@ type Spends struct {
 	SiempreSaleSpends decimal.Decimal `json:"siempreSaleSpends"`
 }
 
-func GetTotalSpends(totalSpends decimal.Decimal, tickets []Ticket) Spends {
+func CheckPlayerSpends(p Player) Spends {
 	TS := decimal.NewFromInt(0)
 	RS := decimal.NewFromInt(0)
 	SSS := decimal.NewFromInt(0)
@@ -18,7 +20,7 @@ func GetTotalSpends(totalSpends decimal.Decimal, tickets []Ticket) Spends {
 	six := decimal.NewFromInt(6)
 	eight := decimal.NewFromInt(8)
 
-	for _, ticket := range tickets {
+	for _, ticket := range p.Tickets {
 		if ticket.Participation == GP_TradicionalOnly {
 			TS = decimal.Sum(TS, ticket.Cost)
 		} else if ticket.Participation == GP_TradicionalAndRevancha {
@@ -30,10 +32,5 @@ func GetTotalSpends(totalSpends decimal.Decimal, tickets []Ticket) Spends {
 			SSS = decimal.Sum(SSS, ticket.Cost.Div(four))
 		}
 	}
-
 	return Spends{TS, RS, SSS}
-}
-
-func CheckPlayerSpends(p Player) Spends {
-	return GetTotalSpends(p.MoneySpent, p.Tickets)
 }

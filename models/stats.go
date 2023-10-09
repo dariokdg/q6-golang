@@ -23,3 +23,13 @@ type Players struct {
 func GetTotalGamePlayers(players Players) int {
 	return players.TPlayers + players.TRPlayers + players.TRSSPlayers
 }
+
+type Tickets struct {
+	TTickets    int `json:"tradicionalOnly"`
+	TRTickets   int `json:"tradicionalAndRevancha"`
+	TRSSTickets int `json:"tradicionalRevanchaAndSiempreSale"`
+}
+
+func GetTotalGameTickets(tickets Tickets) int {
+	return tickets.TTickets + tickets.TRTickets + tickets.TRSSTickets
+}

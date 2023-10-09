@@ -16,12 +16,6 @@ type Player struct {
 }
 
 func GetPlayer(name string, age int, city string) Player {
-	/*
-		moneySpent := decimal.NewFromInt(0)
-		for _, ticket := range tickets {
-			moneySpent = decimal.Sum(moneySpent, ticket.Cost)
-		}
-	*/
 	return Player{uuid.New(), name, age, city, []Ticket{}, decimal.NewFromInt(0), decimal.NewFromInt(0)}
 }
 
@@ -30,8 +24,8 @@ func AssignTicketToPlayer(player *Player, ticket *Ticket) {
 	player.MoneySpent = decimal.Sum(player.MoneySpent, ticket.Cost)
 }
 
-func AssignTicketsToPlayer(player Player, tickets []Ticket) {
+func AssignTicketsToPlayer(player *Player, tickets []Ticket) {
 	for _, ticket := range tickets {
-		AssignTicketToPlayer(&player, &ticket)
+		AssignTicketToPlayer(player, &ticket)
 	}
 }
