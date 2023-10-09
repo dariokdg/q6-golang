@@ -50,3 +50,7 @@ func generateFakeGameParticipation() models.GameParticipation {
 		return models.GP_TradicionalAndRevanchaAndSiempreSale
 	}
 }
+
+func GetCustomTestPlayer() models.Player {
+	return models.GetPlayer("Dario De Giacomo", 31, "Arroyo Seco", models.GetTicket([]int{7, 9, 11, 20, 32, 43}, models.GP_TradicionalAndRevanchaAndSiempreSale))
+}
