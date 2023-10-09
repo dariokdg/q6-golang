@@ -5,7 +5,7 @@ import (
 	"q6-golang/utils"
 )
 
-func ExecuteGame(players []models.Player) models.Game {
+func ExecuteGame(players []models.Player) models.Quini6 {
 	utils.PrintProgramStartup()
 
 	sales := utils.CalculateTotalSales(players)
@@ -20,5 +20,5 @@ func ExecuteGame(players []models.Player) models.Game {
 	winners := utils.CalculateWinners(players, drawings, prizes)
 	utils.PrintWinners(drawings, prizes, winners)
 
-	return models.Game{TotalSales: sales, Prizes: prizes, Results: drawings, Winners: winners}
+	return models.Quini6{TotalSales: sales, Prizes: prizes, Results: drawings, Winners: winners}
 }
