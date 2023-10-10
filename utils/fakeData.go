@@ -60,9 +60,17 @@ func generateFakeGameParticipation() models.GameParticipation {
 	}
 }
 
-func GetCustomTestPlayer() models.Player {
+func GetCustomTestPlayer(n1 int, n2 int, n3 int, n4 int, n5 int, n6 int) models.Player {
 	var tickets []models.Ticket
-	myPlayer := models.GetPlayer("Dario De Giacomo", 31, "Arroyo Seco")
+	myPlayer := models.GetPlayer("Dario CUSTOM", 31, "Arroyo Seco")
+	tickets = append(tickets, models.GetTicket([]int{n1, n2, n3, n4, n5, n6}, models.GP_TradicionalAndRevanchaAndSiempreSale, myPlayer.ID))
+	models.AssignTicketsToPlayer(&myPlayer, tickets)
+	return myPlayer
+}
+
+func GetPremadeTestPlayer() models.Player {
+	var tickets []models.Ticket
+	myPlayer := models.GetPlayer("Dario PREMADE", 31, "Arroyo Seco")
 	tickets = append(tickets, models.GetTicket([]int{7, 9, 11, 20, 32, 43}, models.GP_TradicionalAndRevanchaAndSiempreSale, myPlayer.ID))
 	models.AssignTicketsToPlayer(&myPlayer, tickets)
 	return myPlayer

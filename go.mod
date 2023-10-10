@@ -7,6 +7,7 @@ require github.com/shopspring/decimal v1.3.1
 require (
 	github.com/Pallinder/go-randomdata v1.2.0 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
+	github.com/gin-contrib/cors v1.4.0 // indirect
 	github.com/go-openapi/errors v0.20.3 // indirect
 	github.com/go-openapi/strfmt v0.21.7 // indirect
 	github.com/google/uuid v1.3.1 // indirect
